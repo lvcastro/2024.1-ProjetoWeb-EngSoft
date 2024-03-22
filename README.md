@@ -5,7 +5,7 @@ Projeto elaborado nas disciplinas de Introdução ao Desenvolvimento Web e Engen
 ## Membros da equipe
 - Antônio Pedro Amado de Menezes Medrado
 - Diego Cabral Morales
-- Henrico Lazuroz Moura de Almeida (so web)
+- Henrico Lazuroz Moura de Almeida
 - Jean Michel Furtado M'Peko
 - Lucas Vizzotto de Castro
 - Murilo Valentim Zabott
