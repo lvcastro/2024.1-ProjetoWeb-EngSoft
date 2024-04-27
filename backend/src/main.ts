@@ -13,7 +13,7 @@ async function bootstrap() {
   const host = configService.get<string>('SERVER_HOST');
   const port = configService.get<number>('SERVER_PORT');
 
-  await app.listen(port);
+  await app.listen(3000);
   logger.log(
     'Bootstrap',
     `Server running on host:${host} and port:${port} in ${env} mode`,

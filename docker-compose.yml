@@ -1,21 +1,25 @@
----
 services:
   mongodb:
     container_name: "alertaqui_db_${NODE_ENV}"
     image: "alertaqui_db_${NODE_ENV}"
     environment:
       - NODE_ENV=${NODE_ENV}
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=password
     build:
       context: ./database
       dockerfile: dockerfile
     ports:
       - 27017:27017
+    volumes:
+      - ./database/data:/data/db
     restart: always
-  #   healthcheck:
-  #     test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet 1
-  #     interval: 10s
-  #     timeout: 10s
-  #     retries: 5
+    # healthcheck:
+    #   test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+    #   interval: 10s
+    #   timeout: 10s
+    #   retries: 5
+    #   start_period: 40s
   backend:
     container_name: "alertaqui_api_${NODE_ENV}"
     image: "alertaqui_api_${NODE_ENV}"
