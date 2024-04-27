@@ -1,0 +1,8 @@
+dist/
+envs/
+node_modules/
+.git/
+coverage/
+.history/
+*.md
+dockerfile

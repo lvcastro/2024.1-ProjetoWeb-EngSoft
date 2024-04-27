@@ -1,0 +1,52 @@
+---
+services:
+  mongodb:
+    container_name: "alertaqui_db_${NODE_ENV}"
+    image: "alertaqui_db_${NODE_ENV}"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+    build:
+      context: ./database
+      target: "${NODE_ENV}"
+      dockerfile: dockerfile
+    ports:
+      - 27017:27017
+  backend:
+    container_name: "alertaqui_api_${NODE_ENV}"
+    image: "alertaqui_api_${NODE_ENV}"
+    environment:
+      - NODE_ENV:${NODE_ENV}
+    build:
+      context: ./backend
+      target: "${NODE_ENV}"
+      dockerfile: dockerfile
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      mongodb:
+        condition: service_healthy
+  web:
+    container_name: "alertaqui_web_${NODE_ENV}"
+    image: "alertaqui_web_${NODE_ENV}"
+    environment:
+      - NODE_ENV:${NODE_ENV}
+    build:
+      context: ./web
+      target: "${NODE_ENV}"
+      dockerfile: dockerfile
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    volumes:
+      - ./web:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - backend
