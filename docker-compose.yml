@@ -7,10 +7,15 @@ services:
       - NODE_ENV=${NODE_ENV}
     build:
       context: ./database
-      target: "${NODE_ENV}"
       dockerfile: dockerfile
     ports:
       - 27017:27017
+    restart: always
+  #   healthcheck:
+  #     test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet 1
+  #     interval: 10s
+  #     timeout: 10s
+  #     retries: 5
   backend:
     container_name: "alertaqui_api_${NODE_ENV}"
     image: "alertaqui_api_${NODE_ENV}"
@@ -28,25 +33,22 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     restart: unless-stopped
-    depends_on:
-      mongodb:
-        condition: service_healthy
-  web:
-    container_name: "alertaqui_web_${NODE_ENV}"
-    image: "alertaqui_web_${NODE_ENV}"
-    environment:
-      - NODE_ENV:${NODE_ENV}
-    build:
-      context: ./web
-      target: "${NODE_ENV}"
-      dockerfile: dockerfile
-    env_file:
-      - .env
-    ports:
-      - 8080:8080
-    volumes:
-      - ./web:/usr/src/app
-      - /usr/src/app/node_modules
-    restart: unless-stopped
-    depends_on:
-      - backend
+    # depends_on:
+    #   mongodb:
+    #     condition: service_healthy
+  # web:
+  #   container_name: "alertaqui_web_${NODE_ENV}"
+  #   image: "alertaqui_web_${NODE_ENV}"
+  #   environment:
+  #     - NODE_ENV:${NODE_ENV}
+  #   build:
+  #     context: ./web
+  #     target: "${NODE_ENV}"
+  #     dockerfile: dockerfile
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - 8080:8080
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - backend
