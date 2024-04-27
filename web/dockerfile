@@ -1,1 +1,20 @@
+# Usa uma imagem leve do Node.js como base
 FROM node:20.11.0-alpine AS dev
+
+# Alterna para o usuário "node" por motivos de segurança
+USER node
+
+# Define o diretório de trabalho como /usr/src/app
+WORKDIR /usr/src/app
+
+# Copia os arquivos package.json e yarn.lock para o contêiner
+COPY --chown=node:node package.json yarn.lock ./
+
+# Executa o comando yarn install para instalar as dependências
+RUN yarn install
+
+# Copia o restante do código da aplicação para o contêiner
+COPY --chown=node:node . .
+
+# Roda as migrations e inicia o NestJS
+CMD ["/bin/sh", "-c", "yarn run vite"]

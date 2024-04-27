@@ -4,8 +4,8 @@ services:
     image: "alertaqui_db_${NODE_ENV}"
     environment:
       - NODE_ENV=${NODE_ENV}
-      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
     build:
       context: ./database
       dockerfile: dockerfile
@@ -40,19 +40,19 @@ services:
     # depends_on:
     #   mongodb:
     #     condition: service_healthy
-  # web:
-  #   container_name: "alertaqui_web_${NODE_ENV}"
-  #   image: "alertaqui_web_${NODE_ENV}"
-  #   environment:
-  #     - NODE_ENV:${NODE_ENV}
-  #   build:
-  #     context: ./web
-  #     target: "${NODE_ENV}"
-  #     dockerfile: dockerfile
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - 8080:8080
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - backend
+  web:
+    container_name: "alertaqui_web_${NODE_ENV}"
+    image: "alertaqui_web_${NODE_ENV}"
+    environment:
+      - NODE_ENV:${NODE_ENV}
+    build:
+      context: ./web
+      target: "${NODE_ENV}"
+      dockerfile: dockerfile
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    depends_on:
+      - backend
