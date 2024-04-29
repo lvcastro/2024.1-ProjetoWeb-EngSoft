@@ -14,6 +14,7 @@ services:
     volumes:
       - ./database/data:/data/db
     restart: always
+    entrypoint: bash -c "docker-entrypoint.sh mongod | jq --unbuffered -r '.msg'"
     # healthcheck:
     #   test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
     #   interval: 10s
