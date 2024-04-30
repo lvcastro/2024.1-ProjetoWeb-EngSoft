@@ -24,7 +24,7 @@
 /* Visualization purposes */
 #navbar-default {
   padding: 15px;
-  background-color: chocolate;
+  background-color: rgb(122, 122, 122);
 }
 
 #navbar-default div {
