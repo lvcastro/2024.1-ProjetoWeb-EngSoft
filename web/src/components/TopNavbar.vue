@@ -1,12 +1,12 @@
 <script setup lang="ts"></script>
 
 <template>
-  <nav id="navbar-default">
-    <div>
-      <a href="/">
-        <img id="main-logo" src="../assets/logo.svg" alt="Alertaqui Logo" />
+  <nav>
+    <div id="navbar-default">
+      <a href="/" id="main-logo">
+        <img src="../assets/logo.svg" alt="Alertaqui Logo" />
       </a>
-      <div>
+      <div id="navbar-elements">
         <ul>
           <li>
             <a href="/">Home</a>
@@ -21,26 +21,38 @@
 </template>
 
 <style>
-/* Visualization purposes */
 #navbar-default {
+  display: flex;
   padding: 15px;
   background-color: rgb(122, 122, 122);
 }
 
-#navbar-default div {
-  display: inline;
+#navbar-default #navbar-elements {
+  flex-grow: 1;
 }
 
 #navbar-default ul {
-  list-style: none;
-  display: inline;
+  display: flex;
+  height: 100%;
+  padding-right: 100px;
+
+  align-items: center;
+  justify-content: end;
 }
 
 #navbar-default li {
   display: inline;
+  text-align: center;
+
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #navbar-default #main-logo {
+  flex-grow: 0;
+}
+
+#navbar-default #main-logo img {
   height: 32px;
 }
 </style>
