@@ -17,7 +17,7 @@ import { RouterLink } from 'vue-router'
             <RouterLink to="/about">Sobre</RouterLink>
           </li>
           <li>
-            <a href="/map">Mapa</a>
+            <RouterLink to="/map">Mapa</RouterLink>
           </li>
         </ul>
       </div>
