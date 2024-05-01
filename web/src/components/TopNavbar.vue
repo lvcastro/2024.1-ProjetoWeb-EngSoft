@@ -4,7 +4,7 @@
   <nav>
     <div id="navbar-default">
       <a href="/" id="main-logo">
-        <img src="../assets/logo.svg" alt="Alertaqui Logo" />
+        <img src="../assets/logoTemp.png" alt="Alertaqui Logo" />
       </a>
       <div id="navbar-elements">
         <ul>
@@ -13,6 +13,9 @@
           </li>
           <li>
             <a href="/about">Sobre</a>
+          </li>
+          <li>
+            <a href="/map">Mapa</a>
           </li>
         </ul>
       </div>
@@ -24,7 +27,7 @@
 #navbar-default {
   display: flex;
   padding: 15px;
-  background-color: rgb(122, 122, 122);
+  background-color: #39878b;
 }
 
 #navbar-default #navbar-elements {
@@ -34,7 +37,8 @@
 #navbar-default ul {
   display: flex;
   height: 100%;
-  padding-right: 100px;
+  margin: 0;
+  padding-right: 128px;
 
   align-items: center;
   justify-content: end;
@@ -53,6 +57,7 @@
 }
 
 #navbar-default #main-logo img {
-  height: 32px;
+  margin-left: 32px;
+  height: 48px;
 }
 </style>
