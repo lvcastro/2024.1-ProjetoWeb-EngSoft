@@ -4,6 +4,7 @@ import PageNotFoundView from '@/views/PageNotFoundView.vue'
 import AboutView from '@/views/AboutView.vue'
 import MapView from '@/views/MapView.vue'
 import AdminView from '@/views/AdminView.vue'
+import TableView from '@/views/TableView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,11 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: AdminView,
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: TableView,
     },
     {
       path: '/:catchall(.*)*',
