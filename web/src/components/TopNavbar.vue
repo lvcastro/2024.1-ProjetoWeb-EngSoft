@@ -31,7 +31,7 @@ const navbar_links: NavbarLink[] = [
       <div id="navbar-elements">
         <ul>
           <li v-for="navbar_link in navbar_links" :key="navbar_link.name">
-            <RouterLink :to="navbar_link.path">{{ navbar_link.name }}</RouterLink>
+            <RouterLink :to="navbar_link.path" class="text-decoration-none text-white">{{ navbar_link.name }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -82,4 +82,5 @@ nav {
   height: 48px;
   vertical-align: center;
 }
+
 </style>
