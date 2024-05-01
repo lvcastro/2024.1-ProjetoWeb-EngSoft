@@ -67,3 +67,7 @@ ul {
 .bold {
   font-weight: bold;
 }
+
+.bg-lightyellow {
+  background-color: #ece8d7;
+}

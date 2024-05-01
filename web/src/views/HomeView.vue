@@ -43,10 +43,6 @@
   flex-direction: column;
 }
 
-.bg-lightyellow {
-  background-color: #ece8d7;
-}
-
 .card-green {
   background-color: #39878b;
   border-radius: 20px;
