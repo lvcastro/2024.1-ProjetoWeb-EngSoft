@@ -43,23 +43,6 @@
   flex-direction: column;
 }
 
-.card-green {
-  background-color: #39878b;
-  border-radius: 20px;
-}
-
-.custom-form-field {
-  background-color: #95b0b7;
-  border: none;
-  color: #fff;
-}
-
-.custom-form-field:focus {
-  background-color: #95b0b7;
-  border: none;
-  color: #fff;
-}
-
 .custom-form-button {
   background-color: #326775;
   color: #fff;
