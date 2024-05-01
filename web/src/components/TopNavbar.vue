@@ -40,6 +40,11 @@ const navbar_links: NavbarLink[] = [
 </template>
 
 <style>
+nav {
+  width: 100%;
+  height: fit-content;
+}
+
 #navbar-default {
   display: flex;
   padding: 15px;
