@@ -13,6 +13,8 @@ body {
   height: inherit;
     width: inherit;
   font-weight: normal;
+  display: flex;
+  flex-direction: column;
 }
 
 a,
@@ -33,10 +35,6 @@ a,
   body {
     display: flex;
     place-items: center;
-  }
-
-  #app {
-    display:block;
   }
 }
 

@@ -1,5 +1,25 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+
+interface NavbarLink {
+  name: string
+  path: string
+}
+
+const navbar_links: NavbarLink[] = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Sobre',
+    path: '/about',
+  },
+  {
+    name: 'Mapa',
+    path: '/map',
+  },
+]
 </script>
 
 <template>
@@ -10,14 +30,8 @@ import { RouterLink } from 'vue-router'
       /></RouterLink>
       <div id="navbar-elements">
         <ul>
-          <li>
-            <RouterLink to="/">Home</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/about">Sobre</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/map">Mapa</RouterLink>
+          <li v-for="navbar_link in navbar_links" :key="navbar_link.name">
+            <RouterLink :to="navbar_link.path">{{ navbar_link.name }}</RouterLink>
           </li>
         </ul>
       </div>
@@ -26,6 +40,11 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <style>
+nav {
+  width: 100%;
+  height: fit-content;
+}
+
 #navbar-default {
   display: flex;
   padding: 15px;
@@ -56,10 +75,11 @@ import { RouterLink } from 'vue-router'
 
 #navbar-default #main-logo {
   flex-grow: 0;
+  margin-left: 32px;
 }
 
 #navbar-default #main-logo img {
-  margin-left: 32px;
   height: 48px;
+  vertical-align: center;
 }
 </style>
