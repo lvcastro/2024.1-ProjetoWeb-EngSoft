@@ -5,9 +5,9 @@ import { RouterLink } from 'vue-router'
 <template>
   <nav>
     <div id="navbar-default">
-      <a href="/" id="main-logo">
-        <img src="../assets/logoTemp.png" alt="Alertaqui Logo" />
-      </a>
+      <RouterLink id="main-logo" to="/"
+        ><img src="../assets/logoTemp.png" alt="Alertaqui Logo"
+      /></RouterLink>
       <div id="navbar-elements">
         <ul>
           <li>
@@ -40,18 +40,18 @@ import { RouterLink } from 'vue-router'
   display: flex;
   height: 100%;
   margin: 0;
-  padding-right: 128px;
+  padding: 0;
 
   align-items: center;
-  justify-content: end;
+  justify-content: center;
 }
 
 #navbar-default li {
   display: inline;
   text-align: center;
 
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0px 10px 0px 10px;
+  padding: 0;
 }
 
 #navbar-default #main-logo {
