@@ -50,7 +50,7 @@ nav {
 
 #navbar-default {
   display: flex;
-  padding: 15px;
+  padding: 10px;
   background-color: #39878b;
 }
 
@@ -82,7 +82,7 @@ nav {
 }
 
 #navbar-default #main-logo img {
-  height: 48px;
+  height: 36px;
   vertical-align: center;
 }
 </style>
