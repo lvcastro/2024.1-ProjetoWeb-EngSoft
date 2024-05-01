@@ -114,3 +114,7 @@ ul {
 h1 {
   font-weight: bold;
 }
+
+.map-container {
+  z-index: 0;
+}
