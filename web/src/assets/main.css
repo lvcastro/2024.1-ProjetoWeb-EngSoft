@@ -60,7 +60,7 @@ ul {
 .open-sans {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
-  font-size: 14pt;
+  font-size: 11pt;
 }
 
 .lato {
@@ -86,6 +86,11 @@ ul {
   color: #fff;
 }
 
+.custom-form-field::placeholder {
+  color: #fff;
+}
+
+
 .custom-form-field:focus {
   background-color: #95b0b7;
   border: none;
@@ -104,4 +109,8 @@ ul {
 .custom-form-button:hover {
   background-color: #95b0b7;
   color: #fff;
+}
+
+h1 {
+  font-weight: bold;
 }
