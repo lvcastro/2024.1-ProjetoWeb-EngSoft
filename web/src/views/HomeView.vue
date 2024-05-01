@@ -1,5 +1,5 @@
 <script setup>
-  import MapComponent from '../components/MapComponent.vue'
+import MapComponent from '../components/MapComponent.vue'
 </script>
 
 <template>
@@ -8,9 +8,10 @@
       <h1 class="dark-green fs-1 text-center mb-4">Denuncie um problema</h1>
       <div class="card card-green">
         <div class="card-body card-green">
-
           <div class="mb-3">
-            <label for="report-subject-type-select" class="form-label text-white">Tipo do problema</label>
+            <label for="report-subject-type-select" class="form-label text-white"
+              >Tipo do problema</label
+            >
             <select class="form-select custom-form-field" id="report-subject-type-select">
               <option selected disabled hidden>Selecione uma opção</option>
               <option value="1">Buraco</option>
@@ -19,44 +20,47 @@
               <option value="4">Falta de iluminação</option>
             </select>
           </div>
-          
+
           <div class="mb-3">
-            <label for="report-email-input" class="form-label text-white">E-mail para receber atualizações (opcional)</label>
-            <input type="email" class="form-control custom-form-field" id="report-email-input" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text text-white">Nós nunca compartilharemos seu email com ninguém.</div>
+            <label for="report-email-input" class="form-label text-white"
+              >E-mail para receber atualizações (opcional)</label
+            >
+            <input
+              type="email"
+              class="form-control custom-form-field"
+              id="report-email-input"
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" class="form-text text-white">
+              Nós nunca compartilharemos seu email com ninguém.
+            </div>
           </div>
-          
+
           <p class="text-white text-center">Qual a localização do problema?</p>
           <div class="my-3 d-flex justify-content-center">
-            <input type="text" class="form-control custom-form-field" id="report-address-input" v-model="address" placeholder="Digite o endereço ou marque-o no mapa" style="max-width: 500px;">
+            <input
+              type="text"
+              class="form-control custom-form-field"
+              id="report-address-input"
+              v-model="address"
+              placeholder="Digite o endereço ou marque-o no mapa"
+              style="max-width: 500px"
+            />
           </div>
           <div class="container mb-3 d-flex justify-content-center">
-            <MapComponent style="height: 300px; max-width: 500px; border-radius: 20px;" />
+            <MapComponent style="height: 300px; max-width: 500px; border-radius: 20px" />
           </div>
 
           <button type="submit" class="btn custom-form-button float-end">Enviar</button>
         </div>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <style>
 #app {
   display: flex;
   flex-direction: column;
-}
-
-.custom-form-button {
-  background-color: #326775;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  transition: background-color 0.3s;
-}
-
-.custom-form-button:hover {
-  background-color: #95b0b7;
-  color: #fff;
 }
 </style>
