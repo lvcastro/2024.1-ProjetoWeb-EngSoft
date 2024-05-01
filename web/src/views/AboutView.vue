@@ -7,9 +7,9 @@
 
       <p class="container dark-grey">
         Projeto elaborado nas disciplinas de Introdução ao Desenvolvimento Web e Engenharia de Software do ICMC (USP São
-        Carlos) no período de 2024.1. O objetivo do projeto é facilitar a identificação dos principais problemas que afetam
-        a locomoção e a segurança nas ruas de São Carlos e tornar sua manutenção mais eficiente, e então os habitantes se
-        sintam mais satisfeitos durante seu dia a dia.
+        Carlos) no período de 2024.1. Seu objetivo principal é facilitar a identificação dos principais problemas que impactam
+        a locomoção e a segurança nas ruas de São Carlos, buscando tornar sua manutenção mais eficiente, tendo em vista a
+        melhoria da qualidade de vida dos habitantes da cidade.
       </p>
 
       <h2 class="green-2 fs-3 my-4">Desenvolvedores:</h2>
