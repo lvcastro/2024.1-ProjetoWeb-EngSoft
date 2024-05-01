@@ -1,6 +1,6 @@
 <template>
   <div class="bg-lightyellow mx-0 flex-grow-1 row align-items-center">
-    <div id="login-container" class="mx-auto text-center">
+    <div id="login-container" class="mx-auto text-center lato">
       <h1 class="mt-4">Login Administradores</h1>
       <form>
         <div class="mt-5 mb-3">
