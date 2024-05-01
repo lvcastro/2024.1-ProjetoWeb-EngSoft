@@ -57,11 +57,10 @@ import { RouterLink } from 'vue-router'
 #navbar-default #main-logo {
   flex-grow: 0;
   margin-left: 32px;
-  height: 48px;
 }
 
 #navbar-default #main-logo img {
-  height: inherit;
+  height: 48px;
   vertical-align: center;
 }
 </style>
