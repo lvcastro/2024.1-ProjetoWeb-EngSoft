@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+</script>
 
 <template>
   <nav>
@@ -9,10 +11,10 @@
       <div id="navbar-elements">
         <ul>
           <li>
-            <a href="/">Home</a>
+            <RouterLink to="/">Home</RouterLink>
           </li>
           <li>
-            <a href="/about">Sobre</a>
+            <RouterLink to="/about">Sobre</RouterLink>
           </li>
           <li>
             <a href="/map">Mapa</a>
