@@ -31,10 +31,13 @@ const navbar_links: NavbarLink[] = [
       <div id="navbar-elements">
         <ul>
           <li v-for="navbar_link in navbar_links" :key="navbar_link.name">
-            <RouterLink :to="navbar_link.path" class="text-decoration-none text-white">{{ navbar_link.name }}</RouterLink>
+            <RouterLink :to="navbar_link.path" class="text-decoration-none text-white">{{
+              navbar_link.name
+            }}</RouterLink>
           </li>
         </ul>
       </div>
+      <div style="flex: 1 1 0px"></div>
     </div>
   </nav>
 </template>
@@ -52,7 +55,7 @@ nav {
 }
 
 #navbar-default #navbar-elements {
-  flex-grow: 1;
+  flex: 1 1 0px;
 }
 
 #navbar-default ul {
@@ -74,13 +77,12 @@ nav {
 }
 
 #navbar-default #main-logo {
-  flex-grow: 0;
-  margin-left: 32px;
+  flex: 1 1 0px;
+  padding: 0;
 }
 
 #navbar-default #main-logo img {
   height: 48px;
   vertical-align: center;
 }
-
 </style>

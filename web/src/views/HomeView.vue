@@ -26,8 +26,8 @@
             <div id="emailHelp" class="form-text text-white">Nós nunca compartilharemos seu email com ninguém.</div>
           </div>
           
-          <div class="container">
-            <MapComponent />
+          <div class="container mb-3 d-flex justify-content-center">
+            <MapComponent style="height: 300px; max-width: 500px; border-radius: 20px;" />
           </div>
 
           <button type="submit" class="btn custom-form-button float-end">Enviar</button>
