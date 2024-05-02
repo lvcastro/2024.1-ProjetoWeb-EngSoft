@@ -12,7 +12,7 @@
         eficiente, tendo em vista a melhoria da qualidade de vida dos habitantes da cidade.
       </p>
 
-      <h2 class="green-2 fs-3 mt-4 mb-2">Desenvolvedores:</h2>
+      <h2 class="green-2 fs-3 mt-4 mb-2">Desenvolvedores</h2>
       <ul class="dark-grey open-sans">
         <li>Antônio Medrado</li>
         <li>Diego Cabral</li>
@@ -25,3 +25,9 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+h1, h2 {
+  padding-top: 4%;
+}
+</style>
