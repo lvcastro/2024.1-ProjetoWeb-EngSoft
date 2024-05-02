@@ -33,7 +33,7 @@ const router = createRouter({
       component: AdminView,
     },
     {
-      path: '/table',
+      path: '/admin/table',
       name: 'table',
       component: TableView,
     },

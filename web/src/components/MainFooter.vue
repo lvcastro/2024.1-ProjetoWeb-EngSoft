@@ -12,7 +12,6 @@ footer {
   position: relative;
   left: 0;
   bottom: 0;
-  border-top: 10px solid #ece8d7;
   text-align: center;
 }
 </style>

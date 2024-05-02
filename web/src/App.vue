@@ -8,7 +8,7 @@ import MainFooter from './components/MainFooter.vue'
 
   <RouterView id="router-view-default"></RouterView>
 
-  <MainFooter></MainFooter>
+  <!-- <MainFooter></MainFooter> -->
 </template>
 
 <style>

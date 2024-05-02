@@ -36,9 +36,7 @@ import MapComponent from '../components/MapComponent.vue'
                 </div>
                 <div class="row">
                   <div class="container px-0 d-flex flex-column justify-content-center">
-                    <div class="map-container">
-                      <MapComponent style="height: 400px; max-height: 75vh; border-radius: 20px; width: 100%;" />
-                    </div>
+                    <MapComponent style="height: 200px; max-height: 75vh; border-radius: 20px; width: 100%;" />
                   </div>
                 </div>
               </div>

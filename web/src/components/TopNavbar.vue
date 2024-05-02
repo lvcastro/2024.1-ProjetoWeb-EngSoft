@@ -19,6 +19,10 @@ const navbar_links: NavbarLink[] = [
     name: 'Mapa',
     path: '/map',
   },
+  {
+    name: 'Login',
+    path: '/admin',
+  },
 ]
 </script>
 
