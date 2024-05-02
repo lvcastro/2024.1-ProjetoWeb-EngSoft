@@ -12,16 +12,16 @@ const navbar_links: NavbarLink[] = [
     path: '/',
   },
   {
-    name: 'Sobre',
-    path: '/about',
-  },
-  {
     name: 'Mapa',
     path: '/map',
   },
   {
     name: 'Login',
     path: '/admin',
+  },
+  {
+    name: 'Sobre',
+    path: '/about',
   },
 ]
 </script>
