@@ -49,6 +49,5 @@ import MapComponent from '../components/MapComponent.vue'
         </div>
       </div>
     </div>
-    <div style="height: 60px;"></div> /* Espaço equivalente ao footer */
   </div>
 </template>
