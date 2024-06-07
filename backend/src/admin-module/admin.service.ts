@@ -20,15 +20,15 @@ export class AdminService {
     return await this.adminModel.find().exec();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return `This action returns a #${id} admin`;
   }
 
-  async update(id: number, updateAdminDto: UpdateAdminDto) {
+  async update(id: string, updateAdminDto: UpdateAdminDto) {
     return `This action updates a #${id} admin`;
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return `This action removes a #${id} admin`;
   }
 }

@@ -30,23 +30,17 @@ export class AdminController {
   }
 
   @Get(':id')
-  async findOne(
-    @Param('id', new ParseIntPipe({ errorHttpStatusCode: 400 })) id: number,
-  ) {
+  async findOne(@Param('id') id: string) {
     return await this.adminService.findOne(id);
   }
 
   @Patch(':id')
-  async update(
-    @Param('id', new ParseIntPipe({ errorHttpStatusCode: 400 })) id: number,
-  ) {
+  async update(@Param('id') id: string) {
     return await this.adminService.update(id, UpdateAdminDto);
   }
 
   @Delete(':id')
-  async remove(
-    @Param('id', new ParseIntPipe({ errorHttpStatusCode: 400 })) id: number,
-  ) {
+  async remove(@Param('id') id: string) {
     return await this.adminService.remove(id);
   }
 }
