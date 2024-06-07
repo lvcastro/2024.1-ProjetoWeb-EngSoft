@@ -1,9 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import {
-  ReportPin,
-  ReportPinSchema,
-} from '../report-pin-module/schemas/report-pin.schema';
+import { ReportPin, ReportPinSchema } from './schemas/report-pin.schema';
 import { ReportPinService } from './report-pin.service';
 import { ReportPinController } from './report-pin.controller';
 
