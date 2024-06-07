@@ -16,10 +16,6 @@ const navbar_links: NavbarLink[] = [
     path: '/map',
   },
   {
-    name: 'Login',
-    path: '/admin',
-  },
-  {
     name: 'Sobre',
     path: '/about',
   },
@@ -30,7 +26,7 @@ const navbar_links: NavbarLink[] = [
   <nav>
     <div id="navbar-default">
       <RouterLink id="main-logo" to="/"
-        ><img src="../assets/logoTemp.png" alt="Alertaqui Logo"
+        ><img src="../assets/logo-temp.png" alt="Alertaqui Logo"
       /></RouterLink>
       <div id="navbar-elements">
         <ul>
@@ -41,7 +37,8 @@ const navbar_links: NavbarLink[] = [
           </li>
         </ul>
       </div>
-      <div style="flex: 1 1 0px"></div>
+      <div style="display:grid; flex: 1 1 0px; align-content: center;"><RouterLink style="justify-self: end; margin-right: 64px;" to="/admin" class="text-decoration-none text-white">Login
+            </RouterLink></div>
     </div>
   </nav>
 </template>
@@ -88,5 +85,6 @@ nav {
 #navbar-default #main-logo img {
   height: 36px;
   vertical-align: center;
+  margin-left: 64px;
 }
 </style>
