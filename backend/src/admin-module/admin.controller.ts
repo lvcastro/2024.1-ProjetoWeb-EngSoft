@@ -6,9 +6,9 @@ import {
   Patch,
   Param,
   Delete,
-  ParseIntPipe,
   ValidationPipe,
   UsePipes,
+  UseGuards,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -21,26 +21,26 @@ export class AdminController {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async create(@Body() createAdminDto: CreateAdminDto) {
-    return await this.adminService.create(createAdminDto);
+    return this.adminService.create(createAdminDto);
   }
 
   @Get()
   async findAll() {
-    return await this.adminService.findAll();
+    return this.adminService.findAll();
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.adminService.findOne(id);
+    return this.adminService.findOneById(id);
   }
 
   @Patch(':id')
   async update(@Param('id') id: string) {
-    return await this.adminService.update(id, UpdateAdminDto);
+    return this.adminService.update(id, UpdateAdminDto);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.adminService.remove(id);
+    return this.adminService.remove(id);
   }
 }
