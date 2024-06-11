@@ -12,7 +12,7 @@ export class Admin {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true, select: false }) // Select false pra não aparecer em querys
+  @Prop({ required: true, select: false }) // Não retornar a senha salva automaticamente
   password: string;
 }
 

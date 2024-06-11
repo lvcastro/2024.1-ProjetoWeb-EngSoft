@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Admin } from './schemas/admin.schema';
-import { AdminDocument } from './schemas/admin.schema';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AdminService {
@@ -12,16 +12,25 @@ export class AdminService {
     @InjectModel(Admin.name) private readonly adminModel: Model<Admin>,
   ) {}
 
-  async create(createAdminDto: CreateAdminDto) {
-    return await this.adminModel.create(createAdminDto);
+  async create({ password, ...userDetails }: CreateAdminDto) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const admin = new this.adminModel({
+      ...userDetails,
+      password: hashedPassword,
+    });
+
+    await admin.save();
+
+    return { statusCode: 201, message: 'Administrador criado com sucesso.' };
   }
 
   async findAll() {
-    return await this.adminModel.find().exec();
+    return this.adminModel.find().exec();
   }
 
-  async findOne(id: string) {
-    return `This action returns a #${id} admin`;
+  async findOneById(id: string) {
+    return this.adminModel.findById(id).exec();
   }
 
   async update(id: string, updateAdminDto: UpdateAdminDto) {
@@ -29,6 +38,29 @@ export class AdminService {
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} admin`;
+    return this.adminModel.findByIdAndDelete(id);
+  }
+
+  async validateAdmin(email: string, password: string) {
+    const findUser = await this.adminModel
+      .findOne({ email: email })
+      .select('+password')
+      .exec();
+
+    if (!findUser) {
+      throw new UnauthorizedException('Email ou senha inválidos');
+    }
+
+    const valid = await bcrypt.compare(password, findUser.password);
+
+    if (!valid) {
+      throw new UnauthorizedException('Email ou senha inválidos');
+    }
+
+    return {
+      id: findUser.id,
+      email: findUser.email,
+      name: findUser.name,
+    };
   }
 }
