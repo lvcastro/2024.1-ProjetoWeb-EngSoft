@@ -58,12 +58,12 @@ import MapComponent from '../components/MapComponent.vue'
 <style scoped>
 .map-container {
   width: 100%;
-  height: 50vh; /* Altura padrão para o mapa */
+  height: 50vh;
 }
 
 @media (max-width: 768px) {
   .map-container {
-    height: 30vh; /* Ajuste para telas menores */
+    height: 30vh;
   }
 }
 
