@@ -1,28 +1,30 @@
 import {
+  Body,
   Controller,
   Get,
-  HttpException,
-  HttpStatus,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ReportPin } from 'src/report-pin-module/schemas/report-pin.schema';
 import { ReportPinService } from './report-pin.service';
+import { CreatePinDto } from './dto/create-pin.dto';
+import { Public } from 'src/custom-decorators/decorators';
 
 @Controller('reports')
 export class ReportPinController {
   constructor(private reportPinService: ReportPinService) {}
 
+  @Public()
   @Get()
   async get(): Promise<ReportPin[]> {
-    try {
-      return this.reportPinService.getPins();
-    } catch (error) {
-      throw new HttpException('Error', HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    return this.reportPinService.getPins();
   }
 
+  @Public()
   @Post()
-  async create(): Promise<ReportPin> {
-    return this.reportPinService.create({});
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async create(@Body() createPinDto: CreatePinDto): Promise<ReportPin> {
+    return this.reportPinService.create(createPinDto);
   }
 }

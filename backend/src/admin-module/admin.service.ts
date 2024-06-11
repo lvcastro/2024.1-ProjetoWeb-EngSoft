@@ -12,15 +12,10 @@ export class AdminService {
     @InjectModel(Admin.name) private readonly adminModel: Model<Admin>,
   ) {}
 
-  async create({ password, ...userDetails }: CreateAdminDto) {
-    const hashedPassword = await bcrypt.hash(password, 10);
+  async create(user: CreateAdminDto) {
+    user.password = await bcrypt.hash(user.password, 10);
 
-    const admin = new this.adminModel({
-      ...userDetails,
-      password: hashedPassword,
-    });
-
-    await admin.save();
+    await this.adminModel.create(user);
 
     return { statusCode: 201, message: 'Administrador criado com sucesso.' };
   }
@@ -34,7 +29,11 @@ export class AdminService {
   }
 
   async update(id: string, updateAdminDto: UpdateAdminDto) {
-    return `This action updates a #${id} admin`;
+    if (updateAdminDto.password) {
+      updateAdminDto.password = await bcrypt.hash(updateAdminDto.password, 10);
+    }
+
+    return this.adminModel.findByIdAndUpdate(id, updateAdminDto, { new: true });
   }
 
   async remove(id: string) {

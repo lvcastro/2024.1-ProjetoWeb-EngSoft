@@ -1,7 +1,13 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { Public } from 'src/custom-decorators/decorators';
 import { AuthService } from './auth.service';
 import { AuthPayloadDto } from './dto/auth.dto';
-import { Public } from 'src/custom-decorators/public';
 
 @Controller('auth')
 export class AuthController {
@@ -9,6 +15,7 @@ export class AuthController {
 
   @Public()
   @Post('login')
+  @UsePipes(new ValidationPipe({ transform: true }))
   async login(@Body() authPayload: AuthPayloadDto) {
     return this.authService.login(authPayload);
   }
