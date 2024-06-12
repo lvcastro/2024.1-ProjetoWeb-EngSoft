@@ -18,18 +18,25 @@ const navbar_links: NavbarLink[] = [
   {
     name: 'Sobre',
     path: '/about',
-  }
+  },
 ]
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md justify-content-center" style="background-color: #39878b;">
+  <nav class="navbar navbar-expand-md justify-content-center" style="background-color: #39878b">
     <div class="container">
       <RouterLink to="/" class="navbar-brand d-flex w-50 me-auto">
-        <img id="main-logo" src="../assets/logo-temp.png" alt="Alertaqui Logo">
+        <img id="main-logo" src="../assets/logo-temp.png" alt="Alertaqui Logo" />
       </RouterLink>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse w-100" id="navbarNav">
@@ -41,9 +48,8 @@ const navbar_links: NavbarLink[] = [
           </li>
         </ul>
         <div class="nav navbar-nav ms-auto w-100 justify-content-end">
-            <a class="nav-link text-white" href="/admin">Login</a>
+          <a class="nav-link text-white" href="/admin">Login</a>
         </div>
-        
       </div>
     </div>
   </nav>
