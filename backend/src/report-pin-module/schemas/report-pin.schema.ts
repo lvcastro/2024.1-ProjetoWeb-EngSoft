@@ -9,10 +9,10 @@ export class ReportPin {
   coordinates: string;
 
   @Prop({ required: true })
-  tipoDoProblema: string;
+  problem: string;
 
   @Prop()
-  emailContato?: string;
+  conctactEmail?: string;
 }
 
 export const ReportPinSchema = SchemaFactory.createForClass(ReportPin);

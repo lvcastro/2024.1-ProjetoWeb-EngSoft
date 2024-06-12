@@ -1,30 +1,20 @@
-import { Type } from 'class-transformer';
 import {
   IsEmail,
-  IsPhoneNumber,
   IsNotEmpty,
   IsLatLong,
-  ValidateNested,
   IsOptional,
+  IsString,
 } from 'class-validator';
-
-export class ReporterContactInfoDto {
-  @IsEmail({})
-  @IsOptional()
-  email?: string;
-
-  @IsPhoneNumber('BR')
-  @IsOptional()
-  phoneNumber?: string;
-}
 
 export class CreatePinDto {
   @IsNotEmpty()
   @IsLatLong()
   coordinates: string;
 
-  @ValidateNested()
+  @IsString()
+  problem: string;
+
   @IsOptional()
-  @Type(() => ReporterContactInfoDto)
-  contactInfo?: ReporterContactInfoDto;
+  @IsEmail()
+  contactEmail?: string;
 }
