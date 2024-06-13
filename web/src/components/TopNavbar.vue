@@ -28,7 +28,7 @@ const navbar_links: NavbarLink[] = [
       <RouterLink to="/" class="navbar-brand d-flex w-50 me-auto">
         <img id="main-logo" src="../assets/logo-temp.png" alt="Alertaqui Logo">
       </RouterLink>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
