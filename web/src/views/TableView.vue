@@ -105,7 +105,8 @@
             return {
                 admins: [],
                 newAdmin: { name: "", email: "", password: "" },
-                currentAdmin: { name: "", email: "", password: "" },
+                currentAdmin: { name: "", password: "" },
+                currentAdminId: null,
                 newPassword: "",
             };
         },
@@ -129,6 +130,7 @@
             },
             setCurrentAdmin(admin) {
                 this.currentAdmin = { ...admin };
+                currentAdminId = admin.id;
             },
             async updateAdmin() {
                 try {
@@ -136,29 +138,31 @@
                         this.currentAdmin.password = this.newPassword;
                         this.newPassword = "";
                     }
-                    await axios.patch(`http://localhost:3000/admin/${this.currentAdmin.email}`, this.currentAdmin)
+                    await axios.patch(`http://localhost:3000/admin/${this.currentAdminId}`, this.currentAdmin)
                     this.fetchAdmins();
-                    this.currentAdmin = { name: "", email: "", password: "" };
+                    this.currentAdmin = { name: "", password: "" };
+                    currentAdminId = null;
                 } catch(error){
                     console.error('Erro ao dar update no admin:', error);
                 }
             },
             async removeAdmin() {
                 try {
-                    await axios.delete(`http://localhost:3000/admin/${this.currentAdmin.email}`);
+                    await axios.delete(`http://localhost:3000/admin/${this.currentAdminId}`);
                     this.fetchAdmins();
-                    this.currentAdmin = { name: "", email: "", password: "" };
+                    this.currentAdmin = { name: "", password: "" };
+                    currentAdminId = null;
                 } catch(error) {
                     console.error('Erro ao remover admin:', error);
                 }
             },
             cancel() {
                 this.newAdmin = { name: "", email: "", password: "" };
-                this.currentAdmin = { name: "", email: "", password: "" };
+                this.currentAdmin = { name: "", password: "" };
             }
         },
         created() {
-            //this.fetchAdmins();
+            this.fetchAdmins();
         }
     };
 </script>
