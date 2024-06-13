@@ -60,6 +60,12 @@ const fetchAddress = async (lat, lng) => {
 // Função para enviar os dados para o backend
 const submitForm = async () => {
   try {
+    // Verifica se as coordenadas estão preenchidas
+    if (!coordinates.value) {
+      alert('Por favor, selecione um endereço no mapa ou digite um endereço válido.');
+      return;
+    }
+    
     const data = {
       coordinates: coordinates.value,
       problem: problemType.value,
