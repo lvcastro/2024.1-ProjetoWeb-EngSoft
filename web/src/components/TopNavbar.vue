@@ -23,6 +23,7 @@ const navbar_links: NavbarLink[] = [
 </script>
 
 <template>
+  
   <nav class="navbar navbar-expand-md justify-content-center" style="background-color: #39878b">
     <div class="container">
       <RouterLink to="/" class="navbar-brand d-flex w-50 me-auto">
@@ -31,8 +32,8 @@ const navbar_links: NavbarLink[] = [
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-bs-toggle="collapse"
-        data-bs-bs-target="#navbarNav"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"

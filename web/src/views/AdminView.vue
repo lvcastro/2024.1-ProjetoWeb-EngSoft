@@ -11,9 +11,6 @@
             id="inputEmail"
             aria-describedby="emailHelp"
           />
-          <div id="emailHelp" class="custom-form-text">
-            Nós nunca compartilharemos seu email com ninguém.
-          </div>
         </div>
         <div class="mb-3">
           <label for="inputPassword" class="form-label">Senha</label>
