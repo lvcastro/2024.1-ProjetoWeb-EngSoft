@@ -8,7 +8,6 @@ import {
   Delete,
   ValidationPipe,
   UsePipes,
-  UseGuards,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -35,8 +34,12 @@ export class AdminController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string) {
-    return this.adminService.update(id, UpdateAdminDto);
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async update(
+    @Param('id') id: string,
+    @Body() updateAdminDto: UpdateAdminDto,
+  ) {
+    return this.adminService.update(id, updateAdminDto);
   }
 
   @Delete(':id')

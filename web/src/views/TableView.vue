@@ -38,18 +38,18 @@
                         <form>
                             <div class="mb-3">
                                 <label for="add_name" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="add_name" required>
+                                <input type="text" class="form-control" id="add_name" v-model="newAdmin.name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="add_email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="add_email" required>
+                                <input type="email" class="form-control" id="add_email" v-model="newAdmin.email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="add_password" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="add_password" required>
+                                <input type="password" class="form-control" id="add_password" v-model="newAdmin.password" required>
                             </div>
                             <button type="submit" class="btn text-white bg-green3 m-1" @submit.prevent="addAdmin()">Adicionar</button>
-                            <button type="button" class="btn text-white bg-green3 m-1" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                            <button type="button" class="btn text-white bg-green3 m-1" @click="cancel" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -67,18 +67,15 @@
                         <form>
                             <div class="mb-3">
                                 <label for="change_name" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="change_name" required>
+                                <input type="text" class="form-control" id="change_name" v-model="currentAdmin.name" required>
                             </div>
                             <div class="mb-3">
-                                <label for="change_email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="change_email" required>
+                                <label for="change_password" class="form-label">Nova Senha</label>
+                                <input type="password" class="form-control" id="change_password" v-model="newPassword">
                             </div>
-                            <div class="mb-3">
-                                <label for="change_password" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="change_password" required>
-                            </div>
-                            <button type="submit" class="btn text-white bg-green3 m-1" @submit.prevent="addAdmin">Salvar</button>
-                            <button type="button" class="btn text-white bg-green3 m-1" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                            <button type="submit" class="btn text-white bg-green3 m-1" @submit.prevent="updateAdmin">Salvar</button>
+                            <button type="button" class="btn text-white bg-green3 m-1" @click="removeAdmin" data-bs-dismiss="modal">Remover</button>
+                            <button type="button" class="btn text-white bg-green3 m-1" @click="cancel" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -102,33 +99,66 @@
     }
 </style>
 <script>
+    import axios from 'axios';
     export default {
         data() {
             return {
-                admins: [
-                    { name: "Geraldo Fernandes da Silva", email: "geraldofs234@gmail.com", password: "senha123" },
-                    { name: "Arnaldo Gonçalves Siqueira", email: "arnaldinhosiqueira55@gmail.com", password: "senha456" },
-                    { name: "Vinícius Ferreira de Moraes", email: "viniferreiramoraes@gmail.com", password: "senha789" },
-                ],
-                newAdmin: {
-                    name: "",
-                    email: "",
-                    password: "",
-                },
-                currentAdmin: null,
+                admins: [],
+                newAdmin: { name: "", email: "", password: "" },
+                currentAdmin: { name: "", email: "", password: "" },
+                newPassword: "",
             };
         },
         methods: {
-            addAdmin() {
-                // ta faltando coisa aqui
+            async fetchAdmins() {
+                try {
+                    const response = await axios.get('http://localhost:3000/admin');
+                    this.admins = response.data;
+                } catch(error){
+                    console.error('Erro ao procurar admins:', error);
+                }
+            },
+            async addAdmin() {
+                try {
+                    await axios.post('http://localhost:3000/admin', this.newAdmin);
+                    this.fetchAdmins();
+                    this.newAdmin = { name: "", email: "", password: "" };
+                } catch(error){
+                    console.error('Erro ao adicionar admin:', error);
+                }
             },
             setCurrentAdmin(admin) {
                 this.currentAdmin = { ...admin };
             },
-            updateAdmin() {
-                // ta faltando coisa aqui
-                this.currentAdmin = null;
+            async updateAdmin() {
+                try {
+                    if(this.newPassword != ""){
+                        this.currentAdmin.password = this.newPassword;
+                        this.newPassword = "";
+                    }
+                    await axios.patch(`http://localhost:3000/admin/${this.currentAdmin.email}`, this.currentAdmin)
+                    this.fetchAdmins();
+                    this.currentAdmin = { name: "", email: "", password: "" };
+                } catch(error){
+                    console.error('Erro ao dar update no admin:', error);
+                }
             },
+            async removeAdmin() {
+                try {
+                    await axios.delete(`http://localhost:3000/admin/${this.currentAdmin.email}`);
+                    this.fetchAdmins();
+                    this.currentAdmin = { name: "", email: "", password: "" };
+                } catch(error) {
+                    console.error('Erro ao remover admin:', error);
+                }
+            },
+            cancel() {
+                this.newAdmin = { name: "", email: "", password: "" };
+                this.currentAdmin = { name: "", email: "", password: "" };
+            }
         },
+        created() {
+            //this.fetchAdmins();
+        }
     };
 </script>

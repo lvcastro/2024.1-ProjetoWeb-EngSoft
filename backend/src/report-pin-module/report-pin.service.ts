@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ReportPin } from './schemas/report-pin.schema';
 import { CreatePinDto } from './dto/create-pin.dto';
-import { ReportPinDocument } from './schemas/report-pin.schema';
 
 @Injectable()
 export class ReportPinService {

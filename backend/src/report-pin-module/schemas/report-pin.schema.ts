@@ -1,24 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 
 export type ReportPinDocument = HydratedDocument<ReportPin>;
 
 @Schema()
-export class ReporterContactInfo {
-  @Prop()
-  email: string;
-
-  @Prop()
-  phoneNumber: string;
-}
-
-@Schema()
 export class ReportPin {
-  @Prop({ type: Types.Map, required: true })
+  @Prop({ required: true })
   coordinates: string;
 
-  @Prop({ type: ReporterContactInfo })
-  contactInfo: ReporterContactInfo;
+  @Prop({ required: true })
+  problem: string;
+
+  @Prop()
+  conctactEmail?: string;
 }
 
 export const ReportPinSchema = SchemaFactory.createForClass(ReportPin);
