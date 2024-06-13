@@ -8,10 +8,18 @@ import {
   VMapAttributionControl,
 } from 'vue-map-ui'
 
-import { defineEmits } from 'vue';
+import { defineEmits, defineProps } from 'vue';
 
 // Definindo os eventos que o componente pode emitir
 const emit = defineEmits(['map-click']);
+
+// Definindo as propriedades que o componente pode receber
+const props = defineProps({
+  markers: {
+    type: Array,
+    default: () => []
+  }
+});
 
 const handleMapClick = (event) => {
   const { latlng } = event;
@@ -25,10 +33,8 @@ const handleMapClick = (event) => {
     <VMapZoomControl />
     <VMapScaleControl />
     <VMapAttributionControl position="hbottomcenter" />
-    <VMapMarker :latlng="[-22.0068, -47.8909]"/>
-    <VMapMarker :latlng="[-22.0059, -47.8928]" />
-    <VMapMarker :latlng="[-22.0050, -47.8920]" />
-    <VMapMarker :latlng="[-22.0044, -47.8929]" />
+    <!-- Renderiza os marcadores com base na lista de coordenadas fornecida -->
+    <VMapMarker v-for="(marker, index) in markers" :key="index" :latlng="marker"/>
   </VMap>
 </template>
 

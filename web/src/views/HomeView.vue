@@ -1,45 +1,44 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios';
 import MapComponent from '../components/MapComponent.vue';
+
+// Coordenadas iniciais no centro do mapa
+const centerCoordinates = ref([-22.0061, -47.8911]);
 
 // Estado para armazenar os dados do formulário
 const problemType = ref('');
 const email = ref('');
 const coordinates = ref('');
 const address = ref('');
-
-// Observador para monitorar mudanças no endereço e atualizar as coordenadas
-watch(address, (newAddress, oldAddress) => {
-  if (newAddress !== '') {
-    if (newAddress !== oldAddress) {
-      fetchCoordinates(newAddress);
-    }
-  } else {
-    coordinates.value = '';
-  }
-});
-
+const markers = ref([]);
 
 // Atualiza o endereço quando as coordenadas são definidas pelo clique no mapa
 const handleMapClick = ({ lat, lng }) => {
   coordinates.value = `${lat},${lng}`;
+  markers.value = [[lat, lng]];
+  centerCoordinates.value = [lat, lng];
   fetchAddress(lat, lng);
 };
 
-const fetchCoordinates = async (newAddress) => {
+const fetchCoordinates = async () => {
   try {
-    const response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(newAddress)}&format=json&limit=1`);
+    const response = await axios.get(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address.value)}&format=json&limit=1`);
     if (response.data.length > 0) {
-      coordinates.value = `${response.data[0].lat},${response.data[0].lon}`;
-      console.log(coordinates.value)
+      const lat = parseFloat(response.data[0].lat);
+      const lon = parseFloat(response.data[0].lon);
+      coordinates.value = `${lat},${lon}`;
+      markers.value = [[lat, lon]];
+      centerCoordinates.value = [lat, lon];
     } else {
       coordinates.value = '';
-      console.error('Coordenadas não encontradas para o endereço:', newAddress);
-      alert('Coordenadas não encontradas para o endereço:', newAddress);
+      markers.value = [];
+      console.error('Coordenadas não encontradas para o endereço:', address.value);
+      alert('Coordenadas não encontradas para o endereço:', address.value);
     }
   } catch (error) {
     coordinates.value = '';
+    markers.value = [];
     console.error('Erro ao obter coordenadas:', error);
   }
 };
@@ -62,12 +61,12 @@ const fetchAddress = async (lat, lng) => {
 const submitForm = async () => {
   try {
     const data = {
-      problemType: problemType.value,
-      email: email.value,
-      address: address.value
+      coordinates: coordinates.value,
+      problem: problemType.value,
+      contactEmail: email.value
     };
 
-    const response = await axios.post('/reports', data);
+    const response = await axios.post('http://localhost:3000/reports', data);
     console.log('Resposta do backend:', response.data);
 
     alert('Formulário enviado com sucesso!');
@@ -76,9 +75,10 @@ const submitForm = async () => {
     problemType.value = '';
     email.value = '';
     address.value = '';
+    coordinates.value = '';
+    markers.value = [];
   } catch (error) {
     console.error('Erro ao enviar os dados para o backend:', error);
-
     alert('Houve um erro ao enviar o formulário. Tente novamente mais tarde.');
   }
 };
@@ -94,21 +94,24 @@ const submitForm = async () => {
             <!-- Coluna para o mapa -->
             <div class="col-md-6">
               <div class="map-container">
-                <MapComponent @map-click="handleMapClick" class="map-component" />
+                <MapComponent :markers="markers" :center="centerCoordinates" @map-click="handleMapClick" class="map-component" />
               </div>
             </div>
             <!-- Coluna para o formulário -->
             <div class="col-md-6 d-flex flex-column">
               <label for="report-address-input" class="form-label text-white fs-6">Qual a localização do problema?</label>
-              <input v-model="address" type="text" class="form-control custom-form-field mb-3" id="report-address-input" placeholder="Digite o endereço ou marque-o no mapa" />
+              <div class="input-group mb-3">
+                <input v-model="address" type="text" class="form-control custom-form-field" id="report-address-input" placeholder="Digite e busque, ou marque no mapa" />
+                <button @click="fetchCoordinates" class="btn custom-form-button" type="button">Buscar</button>
+              </div>
               <div class="mb-3">
                 <label for="report-subject-type-select" class="form-label text-white fs-6">Tipo do problema</label>
                 <select v-model="problemType" class="form-select custom-form-field" id="report-subject-type-select">
                   <option selected disabled hidden>Selecione uma opção</option>
-                  <option value="1">Buraco</option>
-                  <option value="2">Árvore caída</option>
-                  <option value="3">Falta de sinalização</option>
-                  <option value="4">Falta de iluminação</option>
+                  <option value="buraco">Buraco</option>
+                  <option value="arvore-caida">Árvore caída</option>
+                  <option value="falta-de-sinalizacao">Falta de sinalização</option>
+                  <option value="falta-de-iluminacao">Falta de iluminação</option>
                 </select>
               </div>
               <label for="report-email-input" class="form-label text-white fs-6">E-mail para receber atualizações (opcional)</label>
