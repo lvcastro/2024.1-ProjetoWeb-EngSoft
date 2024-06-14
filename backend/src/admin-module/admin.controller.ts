@@ -18,7 +18,7 @@ export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @Post()
-  @UsePipes(new ValidationPipe({ transform: true }))
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   async create(@Body() createAdminDto: CreateAdminDto) {
     return this.adminService.create(createAdminDto);
   }
@@ -34,7 +34,7 @@ export class AdminController {
   }
 
   @Patch(':id')
-  @UsePipes(new ValidationPipe({ transform: true }))
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   async update(
     @Param('id') id: string,
     @Body() updateAdminDto: UpdateAdminDto,

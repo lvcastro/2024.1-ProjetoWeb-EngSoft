@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 
 export type AdminDocument = HydratedDocument<Admin>;
 
-@Schema()
+@Schema({ timestamps: false })
 export class Admin {
   // ID é automatico no mongo, não precisa definir no schema
   @Prop({ required: true, unique: true })

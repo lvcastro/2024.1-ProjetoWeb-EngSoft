@@ -17,13 +17,13 @@ export class ReportPinController {
 
   @Public()
   @Get()
-  async get(): Promise<ReportPin[]> {
+  async get() {
     return this.reportPinService.getPins();
   }
 
   @Public()
   @Post()
-  @UsePipes(new ValidationPipe({ transform: true }))
+  @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   async create(@Body() createPinDto: CreatePinDto): Promise<ReportPin> {
     return this.reportPinService.create(createPinDto);
   }

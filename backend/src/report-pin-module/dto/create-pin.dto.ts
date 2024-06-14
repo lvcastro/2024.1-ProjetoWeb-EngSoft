@@ -1,17 +1,17 @@
 import {
   IsEmail,
-  IsNotEmpty,
   IsLatLong,
+  IsNotEmpty,
   IsOptional,
   IsString,
 } from 'class-validator';
 
 export class CreatePinDto {
-  @IsNotEmpty()
   @IsLatLong()
   coordinates: string;
 
   @IsString()
+  @IsNotEmpty()
   problem: string;
 
   @IsOptional()

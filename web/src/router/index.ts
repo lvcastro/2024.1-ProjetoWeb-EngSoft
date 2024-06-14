@@ -3,8 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import PageNotFoundView from '@/views/PageNotFoundView.vue'
 import AboutView from '@/views/AboutView.vue'
 import MapView from '@/views/MapView.vue'
-import AdminView from '@/views/AdminView.vue'
-import TableView from '@/views/TableView.vue'
+import LoginView from '@/views/LoginView.vue'
+import AdminTableView from '@/views/AdminTableView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,14 +28,14 @@ const router = createRouter({
       component: MapView,
     },
     {
-      path: '/admin',
-      name: 'admin',
-      component: AdminView,
+      path: '/login',
+      name: 'login',
+      component: LoginView,
     },
     {
-      path: '/admin/table',
-      name: 'table',
-      component: TableView,
+      path: '/admin',
+      name: 'admin table',
+      component: AdminTableView,
     },
     {
       path: '/:catchall(.*)*',

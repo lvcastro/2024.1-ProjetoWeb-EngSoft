@@ -15,7 +15,8 @@ export class ReportPinService {
     return pin.save();
   }
 
-  async getPins(): Promise<ReportPin[]> {
-    return this.reportPinModel.find().exec();
+  async getPins() {
+    const res = await this.reportPinModel.find().exec();
+    return res;
   }
 }

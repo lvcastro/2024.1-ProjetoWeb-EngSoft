@@ -23,7 +23,6 @@ const navbar_links: NavbarLink[] = [
 </script>
 
 <template>
-  
   <nav class="navbar navbar-expand-md justify-content-center" style="background-color: #39878b">
     <div class="container">
       <RouterLink to="/" class="navbar-brand d-flex w-50 me-auto">
@@ -48,9 +47,7 @@ const navbar_links: NavbarLink[] = [
             }}</RouterLink>
           </li>
         </ul>
-        <div class="nav navbar-nav ms-auto w-100 justify-content-end">
-          <a class="nav-link text-white" href="/admin">Login</a>
-        </div>
+        <div class="nav navbar-nav ms-auto w-100 justify-content-end"></div>
       </div>
     </div>
   </nav>

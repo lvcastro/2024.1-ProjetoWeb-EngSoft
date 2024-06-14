@@ -43,15 +43,15 @@ a,
 }
 
 .dark-green {
-  color: #325B1C
+  color: #325b1c;
 }
 
 .green-2 {
-  color: #7FC79B
+  color: #7fc79b;
 }
 
 .dark-grey {
-  color: #626262
+  color: #626262;
 }
 
 ul {
@@ -59,13 +59,13 @@ ul {
 }
 
 .open-sans {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: 11pt;
 }
 
 .lato {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .bold {
@@ -90,7 +90,6 @@ ul {
 .custom-form-field::placeholder {
   color: #fff;
 }
-
 
 .custom-form-field:focus {
   background-color: #95b0b7;

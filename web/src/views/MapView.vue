@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import MapComponent from '../components/MapComponent.vue';
-import SidebarComponent from '../components/SideBarComponent.vue';
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import MapComponent from '../components/MapComponent.vue'
+import SidebarComponent from '../components/SideBarComponent.vue'
 
-const markers = ref([]);
+const markers = ref([])
 
 // Função para buscar os marcadores do backend
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/reports');
+    const response = await axios.get('http://localhost:3000/reports')
     if (Array.isArray(response.data)) {
-      markers.value = response.data.map(item => [item.latitude, item.longitude]);
+      markers.value = response.data.map((item) => item.coordinates.split(','))
     } else {
-      console.error('Os dados recebidos do backend não são do tipo array:', response.data);
+      console.error('Os dados recebidos do backend não são do tipo array:', response.data)
     }
   } catch (error) {
-    console.error('Erro ao buscar os marcadores do backend:', error);
+    console.error('Erro ao buscar os marcadores do backend:', error)
   }
-});
+})
 </script>
 
 <template>
