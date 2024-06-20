@@ -223,6 +223,7 @@ export default {
         this.fetchAdmins()
         this.currentAdmin = { name: '', password: '' }
         this.currentAdminId = null
+        this.newPassword = ''
       } catch (error) {
         console.error('Erro ao dar update no admin:', error)
       }
