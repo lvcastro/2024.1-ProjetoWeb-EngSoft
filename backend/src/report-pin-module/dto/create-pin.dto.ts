@@ -1,14 +1,29 @@
+import { Type } from 'class-transformer';
 import {
   IsEmail,
-  IsLatLong,
+  IsLatitude,
+  IsLongitude,
   IsNotEmpty,
+  IsObject,
   IsOptional,
   IsString,
+  ValidateNested,
 } from 'class-validator';
 
+class Coord {
+  @IsLatitude()
+  lat: number;
+
+  @IsLongitude()
+  @IsNotEmpty()
+  lng: number;
+}
+
 export class CreatePinDto {
-  @IsLatLong()
-  coordinates: string;
+  @IsObject()
+  @Type(() => Coord)
+  @ValidateNested()
+  coord: Coord;
 
   @IsString()
   @IsNotEmpty()

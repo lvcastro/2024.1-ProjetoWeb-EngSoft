@@ -3,19 +3,25 @@ import { HydratedDocument } from 'mongoose';
 
 export type ReportPinDocument = HydratedDocument<ReportPin>;
 
+@Schema()
+class Coord {
+  @Prop({ required: true })
+  lat: number;
+
+  @Prop({ required: true })
+  lng: number;
+}
+
 @Schema({ timestamps: true })
 export class ReportPin {
-  @Prop({ required: true })
-  coordinates: string;
+  @Prop({ _id: false, required: true })
+  coord: Coord;
 
   @Prop({ required: true })
   problem: string;
 
   @Prop()
   contactEmail?: string;
-
-  @Prop({ default: Date.now })
-  createdAt: Date;
 }
 
 export const ReportPinSchema = SchemaFactory.createForClass(ReportPin);

@@ -10,14 +10,14 @@ const centerCoordinates = ref([-22.0061, -47.8911])
 // Estado para armazenar os dados do formulário
 const problemType = ref('')
 const email = ref('')
-const coordinates = ref('')
+const coord = ref({})
 const address = ref('')
 const markers = ref([])
 const loading = ref(false)
 
 // Atualiza o endereço quando as coordenadas são definidas pelo clique no mapa
 const handleMapClick = ({ lat, lng }) => {
-  coordinates.value = `${lat},${lng}`
+  coord.value = { lat, lng }
   markers.value = [[lat, lng]]
   centerCoordinates.value = [lat, lng]
   fetchAddress(lat, lng)
@@ -30,18 +30,18 @@ const fetchCoordinates = async () => {
     )
     if (response.data.length > 0) {
       const lat = parseFloat(response.data[0].lat)
-      const lon = parseFloat(response.data[0].lon)
-      coordinates.value = `${lat},${lon}`
+      const lng = parseFloat(response.data[0].lon)
+      coord.value = { lat, lng }
       markers.value = [[lat, lon]]
       centerCoordinates.value = [lat, lon]
     } else {
-      coordinates.value = ''
+      coord.value = {}
       markers.value = []
       console.error('Coordenadas não encontradas para o endereço:', address.value)
       showAlert('Coordenadas não encontradas para o endereço: ' + address.value, 'danger')
     }
   } catch (error) {
-    coordinates.value = ''
+    coord.value = {}
     markers.value = []
     console.error('Erro ao obter coordenadas:', error)
   }
@@ -69,7 +69,7 @@ const submitForm = async () => {
 
   try {
     // Verifica se as coordenadas estão preenchidas
-    if (!coordinates.value) {
+    if (!coord.value) {
       showAlert('Por favor, selecione um endereço válido', 'danger')
       return
     }
@@ -80,7 +80,7 @@ const submitForm = async () => {
     }
 
     const data = {
-      coordinates: coordinates.value,
+      coord: coord.value,
       problem: problemType.value,
     }
 
@@ -99,7 +99,7 @@ const submitForm = async () => {
     problemType.value = ''
     email.value = ''
     address.value = ''
-    coordinates.value = ''
+    coord.value = {}
     markers.value = []
   } catch (error) {
     console.error('Erro ao enviar os dados para o backend:', error)

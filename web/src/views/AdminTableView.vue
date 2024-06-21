@@ -169,8 +169,6 @@
 <script>
 import axios from 'axios'
 
-axios.post()
-
 export default {
   data() {
     return {

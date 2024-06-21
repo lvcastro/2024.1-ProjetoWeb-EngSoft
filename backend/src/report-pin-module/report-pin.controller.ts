@@ -24,7 +24,7 @@ export class ReportPinController {
   @Public()
   @Post()
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
-  async create(@Body() createPinDto: CreatePinDto): Promise<ReportPin> {
+  async create(@Body() createPinDto: CreatePinDto) {
     return this.reportPinService.create(createPinDto);
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ReportPin } from './schemas/report-pin.schema';
@@ -10,13 +10,25 @@ export class ReportPinService {
     @InjectModel(ReportPin.name) private reportPinModel: Model<ReportPin>,
   ) {}
 
-  async create(dto: CreatePinDto) {
-    const pin = new this.reportPinModel(dto);
-    return pin.save();
+  async create(createPinDto: CreatePinDto) {
+    console.log(createPinDto);
+
+    const problems = [
+      'buraco',
+      'arvore-caida',
+      'falta-de-sinalizacao',
+      'falta-de-iluminacao',
+    ];
+
+    if (!problems.includes(createPinDto.problem))
+      throw new UnauthorizedException('Tipo de problema inválido.');
+
+    await this.reportPinModel.create(createPinDto);
+    return { statusCode: 201, message: 'Denúncia feita com sucesso.' };
   }
 
   async getPins() {
-    const res = await this.reportPinModel.find().exec();
+    const res = await this.reportPinModel.find().select('-updatedAt').exec();
     return res;
   }
 }
