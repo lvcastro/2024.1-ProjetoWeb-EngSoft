@@ -26,18 +26,12 @@ const handleMapClick = (event) => {
 </script>
 
 <template>
-  <VMap :center="[-22.0061, -47.8911]" :zoom="17" class="map-container" @click="handleMapClick">
+  <VMap :center="[-22.0061, -47.8911]" :zoom="17" @click="handleMapClick">
     <VMapGoogleTileLayer />
     <VMapZoomControl />
     <VMapScaleControl />
     <VMapAttributionControl position="hbottomcenter" />
     <!-- Renderiza os marcadores com base na lista de coordenadas fornecida -->
-    <VMapMarker v-for="(marker, index) in markers" :key="index" :latlng="marker" />
+    <VMapMarker v-for="(marker, index) in markers" :key="index" :latlng="marker.coordinates" />
   </VMap>
-</template>
-
-<style scoped>
-.map-container {
-  height: 94vh;
-}
-</style>
+</template> 
