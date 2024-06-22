@@ -38,9 +38,9 @@ services:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
     restart: unless-stopped
-    # depends_on:
-    #   mongodb:
-    #     condition: service_healthy
+    depends_on:
+      - mongodb
+        # condition: service_healthy
   web:
     container_name: "alertaqui_web_${NODE_ENV}"
     image: "alertaqui_web_${NODE_ENV}"
