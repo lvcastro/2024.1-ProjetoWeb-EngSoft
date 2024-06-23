@@ -6,35 +6,11 @@ import iconHole from '../assets/icon_hole.png';
 import iconTree from '../assets/icon_tree.png';
 import iconStopSign from '../assets/icon_stop-sign.png';
 import iconStreetLamp from '../assets/icon_street-lamp.png';
+import iconFilter from '../assets/filter.png';
 
 const markers = ref([])
-const selectedType = ref('')
-
-// Função para buscar os marcadores do backend
-const fetchMarkers = async () => {
-  try {
-    const response = await axios.get('http://localhost:3000/reports')
-    if (Array.isArray(response.data)) {
-      markers.value = response.data.map((item) => ({
-        coordinates: [item.coord.lat, item.coord.lng],
-        type: item.problem
-      }))
-    } else {
-      console.error('Os dados recebidos do backend não são do tipo array:', response.data)
-    }
-  } catch (error) {
-    console.error('Erro ao buscar os marcadores do backend:', error)
-  }
-}
-
-onMounted(fetchMarkers)
-
-const filteredMarkers = computed(() => {
-  if (!selectedType.value || selectedType.value === 'Todas') return markers.value
-  return markers.value.filter(marker => marker.type === selectedType.value.toLowerCase())
-})
-
-watch(selectedType, fetchMarkers)
+const selectedTypes = ref([])
+const showCheckboxes = ref(false)
 
 const issues = ref([
   {
@@ -66,6 +42,41 @@ const issues = ref([
     icon: iconStreetLamp
   }
 ]);
+
+const checkboxes = ref([
+  { label: 'Buraco', value: 'buraco' },
+  { label: 'Árvore caída', value: 'arvore' },
+  { label: 'Falta de sinalização', value: 'sinalizacao' },
+  { label: 'Falta de iluminação', value: 'iluminacao' },
+]);
+
+const fetchMarkers = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/reports')
+    if (Array.isArray(response.data)) {
+      markers.value = response.data.map((item) => ({
+        coordinates: [item.coord.lat, item.coord.lng],
+        type: item.problem
+      }))
+    } else {
+      console.error('Os dados recebidos do backend não são do tipo array:', response.data)
+    }
+  } catch (error) {
+    console.error('Erro ao buscar os marcadores do backend:', error)
+  }
+}
+
+const filteredMarkers = computed(() => {
+  if (selectedTypes.value.length === 0) return markers.value
+  return markers.value.filter(marker => selectedTypes.value.includes(marker.type))
+})
+
+const toggleCheckboxes = () => {
+  showCheckboxes.value = !showCheckboxes.value;
+}
+
+onMounted(fetchMarkers)
+watch(selectedTypes, fetchMarkers)
 
 </script>
 
@@ -102,7 +113,27 @@ const issues = ref([
             </div>
           </div>
         </div>
+
         <MapComponent :markers="filteredMarkers" class="map-component"/>
+
+        <div class="button-container">
+          <button @click="toggleCheckboxes" class="circular-button">
+            <img :src="iconFilter" alt="filtro" class="button-icon">
+          </button>
+          <div v-show="showCheckboxes" class="checkboxes-container mt-2">
+            <div v-for="checkbox in checkboxes" :key="checkbox.value" class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                :id="checkbox.value"
+                :value="checkbox.value"
+                v-model="selectedTypes"
+              >
+              <label class="form-check-label" :for="checkbox.value">{{ checkbox.label }}</label>
+            </div>
+          </div>
+        </div>
+
       </div>
   </div>
 </template>
@@ -118,7 +149,38 @@ const issues = ref([
   background-color: #39878b;
 }
 .map-component {
-  margin: 0;
-  flex-grow: 1;
+  height: 100%;
+  width: 100%;
 }
+.button-container {
+  width: 10%;
+  margin-left: 2%;
+  position: absolute;
+  top: 10%;
+  z-index: 9999;
+}
+.circular-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #39878b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-icon {
+  width: 30px;
+  height: 30px;
+}
+.checkboxes-container {
+  background-color: #95B0B7;
+  border: 1px solid #39878b;
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+.form-check {
+  margin-bottom: 5px;
+} 
 </style>

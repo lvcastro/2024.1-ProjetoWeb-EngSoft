@@ -1,6 +1,8 @@
 # Usa uma imagem leve do Node.js como base
 FROM node:20.11.0-alpine AS dev
 
+RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
+
 # Alterna para o usuário "node" por motivos de segurança
 USER node
 
