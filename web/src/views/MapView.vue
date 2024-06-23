@@ -45,9 +45,9 @@ const issues = ref([
 
 const checkboxes = ref([
   { label: 'Buraco', value: 'buraco' },
-  { label: 'Árvore caída', value: 'arvore' },
-  { label: 'Falta de sinalização', value: 'sinalizacao' },
-  { label: 'Falta de iluminação', value: 'iluminacao' },
+  { label: 'Árvore caída', value: 'arvore-caida' },
+  { label: 'Falta de sinalização', value: 'falta-de-sinalizacao' },
+  { label: 'Falta de iluminação', value: 'falta-de-iluminacao' },
 ]);
 
 const fetchMarkers = async () => {
@@ -83,9 +83,9 @@ watch(selectedTypes, fetchMarkers)
 <template>
   <div class="bg-lightyellow">
       <div class="container-fluid h-100 p-0">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">
+        <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">
           <span class="text-black">BOTAO</span>
-        </button>
+        </button> -->
         <div
           class="modal fade"
           tabindex="-1"
