@@ -18,7 +18,14 @@ const loading = ref(false)
 // Atualiza o endereço quando as coordenadas são definidas pelo clique no mapa
 const handleMapClick = ({ lat, lng }) => {
   coord.value = { lat, lng }
-  markers.value = [[lat, lng]]
+  markers.value = [
+    {
+      coordinates: {
+        lat: lat,
+        lng: lng,
+      },
+    },
+  ]
   centerCoordinates.value = [lat, lng]
   fetchAddress(lat, lng)
 }

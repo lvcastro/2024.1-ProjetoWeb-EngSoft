@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, computed, watch } from 'vue'
 import axios from 'axios'
 import MapComponent from '../components/MapComponent.vue'
@@ -77,64 +77,72 @@ const toggleCheckboxes = () => {
 
 onMounted(fetchMarkers)
 watch(selectedTypes, fetchMarkers)
-
 </script>
 
 <template>
   <div class="bg-lightyellow">
-      <div class="container-fluid h-100 p-0">
-        <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">
+    <div class="container-fluid h-100 p-0">
+      <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">
           <span class="text-black">BOTAO</span>
         </button> -->
-        <div
-          class="modal fade"
-          tabindex="-1"
-          id="modalAdd"
-          aria-labelledby="modalAddLabel"
-          aria-hidden="true">
-          
-          <div class="modal-dialog">
-            <div class="modal-content text-center text-white">              
-              <div class="modal-header bg-darkgreen">
-                <h5 class="modal-title">Denúncia</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body bg-green3">
-                <h1 class="mb-3 fs-1">{{ issues[0].type }}</h1>
-                <div class="d-flex align-items-center justify-content-center mb-3">
-                  <img :src="issues[0].icon" alt="icon" class="icon me-3" style="width: 40px; height: 40px;">
-                  <div>
-                    <p>{{ issues[0].count }} denúncias até o momento</p>
-                    <p>Local: {{ issues[0].location }}</p>
-                    <p>Primeira denúncia: {{ issues[0].date }}</p>
-                  </div>
+      <div
+        class="modal fade"
+        tabindex="-1"
+        id="modalAdd"
+        aria-labelledby="modalAddLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content text-center text-white">
+            <div class="modal-header bg-darkgreen">
+              <h5 class="modal-title">Denúncia</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body bg-green3">
+              <h1 class="mb-3 fs-1">{{ issues[0].type }}</h1>
+              <div class="d-flex align-items-center justify-content-center mb-3">
+                <img
+                  :src="issues[0].icon"
+                  alt="icon"
+                  class="icon me-3"
+                  style="width: 40px; height: 40px;"
+                />
+                <div>
+                  <p>{{ issues[0].count }} denúncias até o momento</p>
+                  <p>Local: {{ issues[0].location }}</p>
+                  <p>Primeira denúncia: {{ issues[0].date }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <MapComponent :markers="filteredMarkers" class="map-component"/>
+      <MapComponent :markers="filteredMarkers" class="map-component" />
 
-        <div class="button-container">
-          <button @click="toggleCheckboxes" class="circular-button">
-            <img :src="iconFilter" alt="filtro" class="button-icon">
-          </button>
-          <div v-show="showCheckboxes" class="checkboxes-container mt-2">
-            <div v-for="checkbox in checkboxes" :key="checkbox.value" class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                :id="checkbox.value"
-                :value="checkbox.value"
-                v-model="selectedTypes"
-              >
-              <label class="form-check-label" :for="checkbox.value">{{ checkbox.label }}</label>
-            </div>
+      <div class="button-container">
+        <button @click="toggleCheckboxes" class="circular-button">
+          <img :src="iconFilter" alt="filtro" class="button-icon" />
+        </button>
+        <div v-show="showCheckboxes" class="checkboxes-container mt-2">
+          <div v-for="checkbox in checkboxes" :key="checkbox.value" class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              :id="checkbox.value"
+              :value="checkbox.value"
+              v-model="selectedTypes"
+            />
+            <label class="form-check-label" :for="checkbox.value">{{ checkbox.label }}</label>
           </div>
         </div>
-
       </div>
+    </div>
   </div>
 </template>
 
@@ -182,5 +190,5 @@ watch(selectedTypes, fetchMarkers)
 }
 .form-check {
   margin-bottom: 5px;
-} 
+}
 </style>
