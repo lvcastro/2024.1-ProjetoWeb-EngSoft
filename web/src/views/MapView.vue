@@ -2,11 +2,11 @@
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import MapComponent from '../components/MapComponent.vue'
-import iconHole from '../assets/icon_hole.png'
-import iconTree from '../assets/icon_tree.png'
-import iconStopSign from '../assets/icon_stop-sign.png'
-import iconStreetLamp from '../assets/icon_street-lamp.png'
-import iconFilter from '../assets/filter.png'
+import iconHole from '../assets/icon_hole.png';
+import iconTree from '../assets/icon_tree.png';
+import iconSign from '../assets/icon_sign.png';
+import iconLamp from '../assets/icon_lamp.png';
+import iconFilter from '../assets/filter.png';
 
 const markers = ref([])
 const selectedTypes = ref([])
@@ -14,37 +14,6 @@ const showCheckboxes = ref(false)
 
 const showModal = ref(false)
 const selectedMarker = ref(null)
-
-const issues = ref([
-  {
-    type: 'Buraco',
-    count: 5,
-    location: 'Avenida São Carlos',
-    date: '01/06/2024',
-    icon: iconHole,
-  },
-  {
-    type: 'Árvore caída',
-    count: 2,
-    location: 'Rua Cezar Ricomi',
-    date: '02/06/2024',
-    icon: iconTree,
-  },
-  {
-    type: 'Falta de sinalização',
-    count: 3,
-    location: 'Av. Trabalhador São-Carlense',
-    date: '03/06/2024',
-    icon: iconStopSign,
-  },
-  {
-    type: 'Falta de iluminação',
-    count: 4,
-    location: 'Rua Episcopal',
-    date: '04/06/2024',
-    icon: iconStreetLamp,
-  },
-])
 
 const checkboxes = ref([
   { label: 'Buraco', value: 'buraco' },
@@ -79,9 +48,9 @@ const toggleCheckboxes = () => {
 }
 
 const handleMarkerClick = (marker) => {
-  console.log("foi")
-  selectedMarker.value = marker
-  showModal.value = true
+  selectedMarker.value = marker;
+  console.log(selectedMarker);
+  showModal.value = true;
 }
 
 const closeModal = () => {
@@ -89,7 +58,24 @@ const closeModal = () => {
   selectedMarker.value = null
 }
 
+const typeMapping = {
+  'buraco': { label: 'Buraco', icon: iconHole },
+  'arvore-caida': { label: 'Árvore caída', icon: iconTree },
+  'falta-de-sinalizacao': { label: 'Falta de sinalização', icon: iconSign },
+  'falta-de-iluminacao': { label: 'Falta de iluminação', icon: iconLamp }
+};
+
+const formatType = (type) => {
+  return typeMapping[type]?.label || type;
+}
+
+const getIcon = (type) => {
+  return typeMapping[type]?.icon || '';
+}
+
 onMounted(fetchMarkers)
+
+// watch(selectedTypes, fetchMarkers)
 </script>
 
 <template>
@@ -102,41 +88,43 @@ onMounted(fetchMarkers)
         class="modal fade"
         tabindex="-1"
         id="modalAdd"
+        :class="{ show: showModal }"
+        :style="{ display: showModal ? 'block' : 'none' }"
         aria-labelledby="modalAddLabel"
-        aria-hidden="true"
+        :aria-hidden="(!showModal)"
       >
         <div class="modal-dialog">
           <div class="modal-content text-center text-white">
             <div class="modal-header bg-darkgreen">
-              <h5 class="modal-title">Denúncia</h5>
+              <p class="modal-title">Denúncia</p>
               <button
                 type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
+                class="btn-close custom-close-btn"
                 aria-label="Close"
-              ></button>
+                @click="closeModal"
+                ></button>
             </div>
-            <div class="modal-body bg-green3">
-              <h1 class="mb-3 fs-1">{{ issues[0].type }}</h1>
+            <div class="modal-body bg-green3" v-if="selectedMarker">
+              <h1 class="mb-3 fs-1">{{ formatType(selectedMarker.type) }}</h1>
               <div class="d-flex align-items-center justify-content-center mb-3">
                 <img
-                  :src="issues[0].icon"
+                  :src="getIcon(selectedMarker.type)"
                   alt="icon"
                   class="icon me-3"
-                  style="width: 40px; height: 40px"
+                  style="width: 70px; height: 70px;"
                 />
                 <div>
-                  <p>{{ issues[0].count }} denúncias até o momento</p>
-                  <p>Local: {{ issues[0].location }}</p>
-                  <p>Primeira denúncia: {{ issues[0].date }}</p>
+                  <p>{{ selectedMarker.count }} denúncias até o momento</p>
+                  <p>Local: {{ selectedMarker.coordinates }}</p>
+                  <p>Primeira denúncia: {{ selectedMarker.date }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <MapComponent :markers="filteredMarkers" class="map-component" />
+      
+      <MapComponent :markers="filteredMarkers" @marker-click="handleMarkerClick" class="map-component" />
 
       <div class="button-container">
         <button @click="toggleCheckboxes" class="circular-button">
@@ -203,5 +191,10 @@ onMounted(fetchMarkers)
 }
 .form-check {
   margin-bottom: 5px;
+}
+.custom-close-btn {
+  background-color: red; /* Mude esta cor para a cor desejada */
+  border: none;
+  opacity: 1; /* Torne o botão totalmente opaco */
 }
 </style>

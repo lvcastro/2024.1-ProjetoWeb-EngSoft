@@ -7,13 +7,14 @@ import {
   VMapMarker,
   VMapAttributionControl,
 } from 'vue-map-ui'
-import tree from '../assets/tree.png';
-import stop from '../assets/stop.png';
-import lamp from '../assets/lamp.png';
-import hole from '../assets/hole.png';
+import treeMarker from '../assets/marker_tree.png';
+import signMarker from '../assets/marker_sign.png';
+import lampMarker from '../assets/marker_lamp.png';
+import holeMarker from '../assets/marker_hole.png';
+import defaultMarker from '../assets/marker_default.png';
 
 // Definindo os eventos que o componente pode emitir
-const emit = defineEmits(['map-click'])
+const emit = defineEmits(['map-click', 'marker-click'])
 
 // Definindo as propriedades que o componente pode receber
 const props = defineProps({
@@ -24,32 +25,35 @@ const props = defineProps({
 })
 
 const handleMapClick = (event) => {
-  console.log("foi2")
   const { latlng } = event
   emit('map-click', { lat: latlng.lat, lng: latlng.lng })
+}
+
+const handleMarkerClick = (marker) => {
+  emit('marker-click', marker);
 }
 
 const getIcon = (problem) => {
   let iconUrl;
   switch (problem) {
-    case 'arvore-caida  ':
-      iconUrl = tree;
+    case 'arvore-caida':
+      iconUrl = treeMarker;
       break;
     case 'falta-de-sinalizacao':
-      iconUrl = stop;
+      iconUrl = signMarker;
       break;
     case 'falta-de-iluminacao':
-      iconUrl = lamp;
+      iconUrl = lampMarker;
       break;
     case 'buraco':
-      iconUrl = hole;
+      iconUrl = holeMarker;
       break;
     default:
-      iconUrl = tree; // Ícone padrão, caso nenhum problema corresponda
+      iconUrl = defaultMarker; // Ícone padrão, caso nenhum problema corresponda
   }
   return L.icon({
     iconUrl: iconUrl,
-    iconSize: [30, 65]
+    iconSize: [35, 35]
   });
 }
 
@@ -62,6 +66,7 @@ const getIcon = (problem) => {
     <VMapScaleControl />
     <VMapAttributionControl position="hbottomcenter" />
     <!-- Renderiza os marcadores com base na lista de coordenadas fornecida -->
-    <VMapMarker v-for="(marker, index) in markers" :key="index" :latlng="marker.coordinates" :icon="getIcon(marker.type)"/>
+    <VMapMarker @click="handleMarkerClick(marker)" v-for="(marker, index) in markers" :key="index"
+                :latlng="marker.coordinates" :icon="getIcon(marker.type)"/>
   </VMap>
 </template> 
