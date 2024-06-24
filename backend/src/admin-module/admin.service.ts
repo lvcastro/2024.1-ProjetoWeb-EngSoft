@@ -20,11 +20,11 @@ export class AdminService {
     return { statusCode: 201, message: 'Administrador criado com sucesso.' };
   }
 
-  async findAll() {
+  findAll() {
     return this.adminModel.find().exec();
   }
 
-  async findOneById(id: string) {
+  findOneById(id: string) {
     return this.adminModel.findById(id).exec();
   }
 
@@ -36,7 +36,7 @@ export class AdminService {
     return this.adminModel.findByIdAndUpdate(id, updateAdminDto, { new: true });
   }
 
-  async remove(id: string) {
+  remove(id: string) {
     return this.adminModel.findByIdAndDelete(id);
   }
 

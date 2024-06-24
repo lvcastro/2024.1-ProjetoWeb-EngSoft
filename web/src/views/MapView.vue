@@ -1,12 +1,12 @@
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import MapComponent from '../components/MapComponent.vue'
-import iconHole from '../assets/icon_hole.png';
-import iconTree from '../assets/icon_tree.png';
-import iconStopSign from '../assets/icon_stop-sign.png';
-import iconStreetLamp from '../assets/icon_street-lamp.png';
-import iconFilter from '../assets/filter.png';
+import iconHole from '../assets/icon_hole.png'
+import iconTree from '../assets/icon_tree.png'
+import iconStopSign from '../assets/icon_stop-sign.png'
+import iconStreetLamp from '../assets/icon_street-lamp.png'
+import iconFilter from '../assets/filter.png'
 
 const markers = ref([])
 const selectedTypes = ref([])
@@ -18,37 +18,37 @@ const issues = ref([
     count: 5,
     location: 'Avenida São Carlos',
     date: '01/06/2024',
-    icon: iconHole
+    icon: iconHole,
   },
   {
     type: 'Árvore caída',
     count: 2,
     location: 'Rua Cezar Ricomi',
     date: '02/06/2024',
-    icon: iconTree
+    icon: iconTree,
   },
   {
     type: 'Falta de sinalização',
     count: 3,
     location: 'Av. Trabalhador São-Carlense',
     date: '03/06/2024',
-    icon: iconStopSign
+    icon: iconStopSign,
   },
   {
     type: 'Falta de iluminação',
     count: 4,
     location: 'Rua Episcopal',
     date: '04/06/2024',
-    icon: iconStreetLamp
-  }
-]);
+    icon: iconStreetLamp,
+  },
+])
 
 const checkboxes = ref([
   { label: 'Buraco', value: 'buraco' },
   { label: 'Árvore caída', value: 'arvore-caida' },
   { label: 'Falta de sinalização', value: 'falta-de-sinalizacao' },
   { label: 'Falta de iluminação', value: 'falta-de-iluminacao' },
-]);
+])
 
 const fetchMarkers = async () => {
   try {
@@ -56,7 +56,7 @@ const fetchMarkers = async () => {
     if (Array.isArray(response.data)) {
       markers.value = response.data.map((item) => ({
         coordinates: [item.coord.lat, item.coord.lng],
-        type: item.problem
+        type: item.problem,
       }))
     } else {
       console.error('Os dados recebidos do backend não são do tipo array:', response.data)
@@ -68,15 +68,14 @@ const fetchMarkers = async () => {
 
 const filteredMarkers = computed(() => {
   if (selectedTypes.value.length === 0) return markers.value
-  return markers.value.filter(marker => selectedTypes.value.includes(marker.type))
+  return markers.value.filter((marker) => selectedTypes.value.includes(marker.type))
 })
 
 const toggleCheckboxes = () => {
-  showCheckboxes.value = !showCheckboxes.value;
+  showCheckboxes.value = !showCheckboxes.value
 }
 
 onMounted(fetchMarkers)
-watch(selectedTypes, fetchMarkers)
 </script>
 
 <template>
@@ -110,7 +109,7 @@ watch(selectedTypes, fetchMarkers)
                   :src="issues[0].icon"
                   alt="icon"
                   class="icon me-3"
-                  style="width: 40px; height: 40px;"
+                  style="width: 40px; height: 40px"
                 />
                 <div>
                   <p>{{ issues[0].count }} denúncias até o momento</p>
@@ -182,7 +181,7 @@ watch(selectedTypes, fetchMarkers)
   height: 30px;
 }
 .checkboxes-container {
-  background-color: #95B0B7;
+  background-color: #95b0b7;
   border: 1px solid #39878b;
   color: white;
   border-radius: 5px;

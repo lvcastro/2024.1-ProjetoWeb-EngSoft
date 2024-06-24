@@ -22,6 +22,9 @@ export class ReportPin {
 
   @Prop()
   contactEmail?: string;
+
+  @Prop({ default: 'analise' })
+  status: string;
 }
 
 export const ReportPinSchema = SchemaFactory.createForClass(ReportPin);
