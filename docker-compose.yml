@@ -14,13 +14,6 @@ services:
     volumes:
       - ./database/data:/data/db
     restart: always
-    entrypoint: bash -c "docker-entrypoint.sh mongod | jq --unbuffered -r '.msg'"
-    # healthcheck:
-    #   test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
-    #   interval: 10s
-    #   timeout: 10s
-    #   retries: 5
-    #   start_period: 40s
   backend:
     container_name: "alertaqui_api_${NODE_ENV}"
     image: "alertaqui_api_${NODE_ENV}"
@@ -40,7 +33,6 @@ services:
     restart: unless-stopped
     depends_on:
       - mongodb
-        # condition: service_healthy
   web:
     container_name: "alertaqui_web_${NODE_ENV}"
     image: "alertaqui_web_${NODE_ENV}"

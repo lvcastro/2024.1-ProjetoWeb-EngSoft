@@ -5,6 +5,7 @@ import AboutView from '@/views/AboutView.vue'
 import MapView from '@/views/MapView.vue'
 import LoginView from '@/views/LoginView.vue'
 import AdminTableView from '@/views/AdminTableView.vue'
+import ReportTableView from '@/views/ReportTableView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+    },
+    {
+      path: '/reports',
+      name: 'reportTable',
+      component: ReportTableView,
     },
     {
       path: '/admin',

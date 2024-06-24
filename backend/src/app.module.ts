@@ -13,7 +13,7 @@ import { JwtAuthGuard } from './auth-module/guards/jwt-auth.guard';
     ReportPinModule,
     DatabaseModule,
     LoggerModule,
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env', '.env.dev'] }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env', '.dev.env'] }),
     AdminModule,
     AuthModule,
   ],
