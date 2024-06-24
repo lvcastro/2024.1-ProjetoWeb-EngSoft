@@ -24,6 +24,7 @@ const props = defineProps({
 })
 
 const handleMapClick = (event) => {
+  console.log("foi2")
   const { latlng } = event
   emit('map-click', { lat: latlng.lat, lng: latlng.lng })
 }

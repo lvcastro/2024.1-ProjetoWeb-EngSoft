@@ -12,6 +12,9 @@ const markers = ref([])
 const selectedTypes = ref([])
 const showCheckboxes = ref(false)
 
+const showModal = ref(false)
+const selectedMarker = ref(null)
+
 const issues = ref([
   {
     type: 'Buraco',
@@ -73,6 +76,17 @@ const filteredMarkers = computed(() => {
 
 const toggleCheckboxes = () => {
   showCheckboxes.value = !showCheckboxes.value;
+}
+
+const handleMarkerClick = (marker) => {
+  console.log("foi")
+  selectedMarker.value = marker
+  showModal.value = true
+}
+
+const closeModal = () => {
+  showModal.value = false
+  selectedMarker.value = null
 }
 
 onMounted(fetchMarkers)
