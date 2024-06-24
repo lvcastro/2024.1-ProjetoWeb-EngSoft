@@ -6,10 +6,9 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { ReportPin } from 'src/report-pin-module/schemas/report-pin.schema';
 import { ReportPinService } from './report-pin.service';
 import { CreatePinDto } from './dto/create-pin.dto';
-import { Public } from 'src/custom-decorators/decorators';
+import { Public } from 'src/custom-decorators/public.decorator';
 
 @Controller('reports')
 export class ReportPinController {

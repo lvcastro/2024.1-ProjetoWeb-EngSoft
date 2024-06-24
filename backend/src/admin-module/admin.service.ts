@@ -57,9 +57,10 @@ export class AdminService {
     }
 
     return {
-      id: findUser.id,
+      _id: findUser.id,
       email: findUser.email,
       name: findUser.name,
+      isSuperadmin: findUser.isSuperadmin,
     };
   }
 }

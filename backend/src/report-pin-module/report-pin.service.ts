@@ -11,8 +11,6 @@ export class ReportPinService {
   ) {}
 
   async create(createPinDto: CreatePinDto) {
-    console.log(createPinDto);
-
     const problems = [
       'buraco',
       'arvore-caida',

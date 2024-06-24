@@ -14,6 +14,9 @@ export class Admin {
 
   @Prop({ required: true, select: false }) // Não retornar a senha salva automaticamente
   password: string;
+
+  @Prop({ default: false })
+  isSuperadmin: boolean;
 }
 
 export const AdminSchema = SchemaFactory.createForClass(Admin);

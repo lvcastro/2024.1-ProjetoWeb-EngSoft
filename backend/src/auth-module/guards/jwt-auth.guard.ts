@@ -1,7 +1,7 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { IS_PUBLIC_KEY } from 'src/custom-decorators/decorators';
+import { IS_PUBLIC_KEY } from 'src/custom-decorators/public.decorator';
 
 @Injectable()
 // Provider para permitir rotas públicas, já que a guardauth jwt para rotas é global por padrão

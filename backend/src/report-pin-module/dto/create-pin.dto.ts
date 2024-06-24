@@ -12,6 +12,7 @@ import {
 
 class Coord {
   @IsLatitude()
+  @IsNotEmpty()
   lat: number;
 
   @IsLongitude()
@@ -20,16 +21,16 @@ class Coord {
 }
 
 export class CreatePinDto {
-  @IsObject()
   @Type(() => Coord)
   @ValidateNested()
+  @IsObject()
   coord: Coord;
 
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   problem: string;
 
-  @IsOptional()
   @IsEmail()
+  @IsOptional()
   contactEmail?: string;
 }

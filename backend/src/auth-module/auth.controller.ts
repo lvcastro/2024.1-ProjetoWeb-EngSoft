@@ -5,7 +5,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { Public } from 'src/custom-decorators/decorators';
+import { Public } from 'src/custom-decorators/public.decorator';
 import { AuthService } from './auth.service';
 import { AuthPayloadDto } from './dto/auth.dto';
 
