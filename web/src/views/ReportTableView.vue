@@ -5,11 +5,11 @@ import axios from 'axios'
 
 const items = ref([])
 
-const tags = ref([
+const tags = [
   { value: 'analise', label: 'Em análise' },
   { value: 'conserto', label: 'Em conserto' },
   { value: 'resolvido', label: 'Resolvido' },
-])
+]
 
 const problemDict = {
   buraco: 'Buraco',
@@ -81,6 +81,7 @@ onMounted(async () => {
     // const response = await axios.get('http://localhost:3000/reports')
     // items.value = await makeGroups(response.data)
     items.value = await makeGroups(test)
+    console.log(items.value)
   } catch (error) {
     console.error('Erro ao buscar grupos de denúncias', error)
   }
@@ -99,23 +100,17 @@ onMounted(async () => {
           <h5>{{ problemDict[item.problem] }}</h5>
           <h5 class="fw-light">{{ item.address }}</h5>
           <h5>{{ item.length }} Denúncia(s)</h5>
-          <select class="form-select custom-form-field" :id="'group-tag' + index">
-            <option
-              v-for="tag in tags"
-              :key="tag.value"
-              :value="tag.value"
-              :selected="tag.value === item.status"
-            >
-              {{ tag.label }}
-            </option>
-          </select>
+          <h5>{{ item.status }}</h5>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+            <span class="material-symbols-outlined">edit</span>
+          </button>
           <button
             class="btn custom-form-field"
             type="button"
             data-bs-toggle="collapse"
             :data-bs-target="'#collapse' + index"
           >
-            Expandir
+            Ver denúncias
           </button>
         </div>
         <div :id="'collapse' + index" class="collapse">
@@ -129,6 +124,43 @@ onMounted(async () => {
               </p>
             </li>
           </ul>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" color="black">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Editar Tag</h5>
+            <button
+              style="background-color: unset"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <select class="form-select custom-form-field">
+              <option v-for="tag in tags" :key="tag.value" :value="tag.value">
+                {{ tag.label }}
+              </option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-danger">Remover</button>
+          </div>
         </div>
       </div>
     </div>

@@ -13,6 +13,12 @@ body {
   margin: 0;
 }
 
+button {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+}
+
 #app {
   height: inherit;
   width: inherit;
