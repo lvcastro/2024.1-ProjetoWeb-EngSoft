@@ -93,11 +93,11 @@ onMounted(async () => {
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="mb-3 mx-auto border border-black border-2 rounded p-3"
+        class="mb-3 mx-auto card-green text-white p-3"
       >
         <div class="d-flex gap-4 justify-content-between align-items-center">
           <h5>{{ problemDict[item.problem] }}</h5>
-          <h5>{{ item.address }}</h5>
+          <h5 class="fw-light">{{ item.address }}</h5>
           <h5>{{ item.length }} Denúncia(s)</h5>
           <select class="form-select custom-form-field" :id="'group-tag' + index">
             <option
