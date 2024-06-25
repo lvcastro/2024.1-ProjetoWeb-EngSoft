@@ -2,6 +2,10 @@
 import { onMounted, ref } from 'vue'
 import { makeGroups } from '../utils/group-reports'
 import axios from 'axios'
+import iconHole from '../assets/icon_hole.png';
+import iconTree from '../assets/icon_tree.png';
+import iconSign from '../assets/icon_sign.png';
+import iconLamp from '../assets/icon_lamp.png';
 
 const items = ref([])
 
@@ -86,6 +90,16 @@ onMounted(async () => {
     console.error('Erro ao buscar grupos de denúncias', error)
   }
 })
+
+const typeMapping = {
+  'buraco': { label: 'Buraco', icon: iconHole },
+  'arvore-caida': { label: 'Árvore caída', icon: iconTree },
+  'falta-de-sinalizacao': { label: 'Falta de sinalização', icon: iconSign },
+  'falta-de-iluminacao': { label: 'Falta de iluminação', icon: iconLamp }
+};
+const getIcon = (type) => {
+  return typeMapping[type]?.icon || '';
+}
 </script>
 
 <template>
@@ -97,7 +111,7 @@ onMounted(async () => {
         class="mb-3 mx-auto card-green text-white p-3"
       >
         <div class="d-flex gap-4 justify-content-between align-items-center">
-          <h5>{{ problemDict[item.problem] }}</h5>
+          <img :src="getIcon(item.problem)" alt="Problem icon" class="problem-icon" />
           <h5 class="fw-light">{{ item.address }}</h5>
           <h5>{{ item.length }} Denúncia(s)</h5>
           <h5>{{ item.status }}</h5>
@@ -166,3 +180,9 @@ onMounted(async () => {
     </div>
   </div>
 </template>
+<style>
+.problem-icon {
+  width: 35px;
+  height: 35px;
+}
+</style>
