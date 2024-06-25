@@ -25,7 +25,7 @@ export async function makeGroups(ungrouped) {
   for (const a of ungrouped) {
     let added = false
 
-    for (const g of groups) {
+    for (let g of groups) {
       if (a.problem != g.problem || a.status != g.status) continue
 
       const dist = haversineDist(a.coord, g.center)
@@ -54,21 +54,28 @@ export async function makeGroups(ungrouped) {
     }
   }
 
-  for (const g of groups) {
+  for (let g of groups) {
     g.sort((a, b) => a.createdAt > b.createdAt)
 
     try {
       const response = await axios.get(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${g.center.lat}&lon=${g.center.lng}`,
       )
-      if (response.data.display_name) {
-        g.address = response.data.display_name
-      } else {
-        g.address = 'Endereço não encontrado'
+
+      let components = []
+      const fields = ['building', 'house_number', 'road', 'suburb']
+
+      for (const f of fields) {
+        if (response[f]) components.push(response[f])
       }
+
+      const addr = components.join(', ')
+
+      if (addr) g.address = addr
+      else g.address = 'Endereço não encontrado'
     } catch (error) {
       console.error('Erro ao obter o endereço:', error)
-      g.address = 'Erro ao obter o endereço'
+      g.address = 'Endereço não encontrado'
     }
   }
 

@@ -34,11 +34,11 @@ export class ReportPinController {
   @Patch(':id')
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   update(@Param('id') id: string, @Body() updatePinDto: UpdatePinDto) {
-    this.reportPinService.update(id, updatePinDto);
+    return this.reportPinService.update(id, updatePinDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    this.reportPinService.remove(id);
+    return this.reportPinService.remove(id);
   }
 }
