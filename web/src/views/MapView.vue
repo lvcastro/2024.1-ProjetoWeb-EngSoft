@@ -80,7 +80,7 @@ onMounted(fetchMarkers)
 
 <template>
   <div class="bg-lightyellow">
-    <div class="container-fluid h-100 p-0  position-relative">
+    <div class="container-fluid h-100 p-0">
       <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">
           <span class="text-black">BOTAO</span>
         </button> -->
@@ -128,7 +128,10 @@ onMounted(fetchMarkers)
 
       <div class="button-container">
         <button @click="toggleCheckboxes" class="circular-button">
-          <img :src="iconFilter" alt="filtro" class="button-icon" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16" style="position: relative; top: 1.5px; color: #b8e49c">
+            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+          </svg>
+          <!--<img :src="iconFilter" alt="filtro" class="button-icon" style="position: relative; top: 2px; filter: brightness(2);" />-->
         </button>
         <div v-show="showCheckboxes" class="checkboxes-container mt-2">
           <div v-for="checkbox in checkboxes" :key="checkbox.value" class="form-check">
@@ -165,14 +168,14 @@ onMounted(fetchMarkers)
   width: 10%;
   margin-left: 2%;
   position: absolute;
-  top: 2%;
+  top: 10%;
   z-index: 9999;
 }
 .circular-button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: white;
+  background-color: #39878b;
   border: 2px solid #39878b;
   display: flex;
   align-items: center;
@@ -188,6 +191,7 @@ onMounted(fetchMarkers)
   color: white;
   border-radius: 5px;
   padding: 10px;
+  width:fit-content;
 }
 .form-check {
   margin-bottom: 5px;
