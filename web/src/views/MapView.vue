@@ -80,7 +80,7 @@ onMounted(fetchMarkers)
 
 <template>
   <div class="bg-lightyellow">
-    <div class="container-fluid h-100 p-0">
+    <div class="container-fluid h-100 p-0  position-relative">
       <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#modalAdd">
           <span class="text-black">BOTAO</span>
         </button> -->
@@ -165,7 +165,7 @@ onMounted(fetchMarkers)
   width: 10%;
   margin-left: 2%;
   position: absolute;
-  top: 10%;
+  top: 2%;
   z-index: 9999;
 }
 .circular-button {
