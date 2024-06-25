@@ -186,8 +186,7 @@ onMounted(fetchMarkers)
   height: 30px;
 }
 .checkboxes-container {
-  background-color: #95b0b7;
-  border: 1px solid #39878b;
+  background-color: #39878b;
   color: white;
   border-radius: 5px;
   padding: 10px;
