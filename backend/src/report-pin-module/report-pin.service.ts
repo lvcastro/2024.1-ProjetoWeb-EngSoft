@@ -85,7 +85,7 @@ export class ReportPinService {
 
       if (addr) msg += ` Endereço aproximado do problema relatado: ${addr}.`;
 
-      await this.mailService.sendMail({
+      this.mailService.sendMail({
         from: '🗨 Alertaqui 🚨<alertaquidenuncias@gmail.com>',
         to: dest,
         subject: 'Resolução de denúncia de problema em São Carlos',

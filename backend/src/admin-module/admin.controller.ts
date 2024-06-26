@@ -8,17 +8,15 @@ import {
   Delete,
   ValidationPipe,
   UsePipes,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { SuperAdmGuard } from 'src/auth-module/guards/superadm.guard';
-import { Public } from 'src/custom-decorators/public.decorator';
 
 @Controller('admin')
-// @UseGuards(SuperAdmGuard)
+@UseGuards(SuperAdmGuard)
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
@@ -28,7 +26,6 @@ export class AdminController {
     return this.adminService.create(createAdminDto);
   }
 
-  @Public()
   @Get()
   findAll() {
     return this.adminService.findAll();

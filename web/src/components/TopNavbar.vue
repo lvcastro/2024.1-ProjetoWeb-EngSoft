@@ -23,7 +23,7 @@ const navbar_links: NavbarLink[] = [
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-md justify-content-center" style="background-color: #39878b">
+  <nav class="up navbar navbar-expand-md justify-content-center" style="background-color: #39878b">
     <div class="container">
       <RouterLink to="/" class="navbar-brand d-flex w-50 me-auto">
         <img id="main-logo" src="../assets/logo-temp.png" alt="Alertaqui Logo" />
@@ -54,6 +54,10 @@ const navbar_links: NavbarLink[] = [
 </template>
 
 <style>
+.up {
+  z-index: 999;
+}
+
 /* nav {
   width: 100%;
   height: fit-content;

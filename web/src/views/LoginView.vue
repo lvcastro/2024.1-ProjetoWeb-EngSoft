@@ -70,7 +70,7 @@ export default {
 
         localStorage.setItem('jwtToken', response.data)
 
-        this.$router.push({ path: '/admin' })
+        this.$router.push({ path: '/reports' })
       } catch (error) {
         console.error('Erro ao fazer login')
       }

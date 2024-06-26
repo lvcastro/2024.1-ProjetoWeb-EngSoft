@@ -2,11 +2,11 @@
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import MapComponent from '../components/MapComponent.vue'
-import iconHole from '../assets/icon_hole.png';
-import iconTree from '../assets/icon_tree.png';
-import iconSign from '../assets/icon_sign.png';
-import iconLamp from '../assets/icon_lamp.png';
-import iconFilter from '../assets/filter.png';
+import iconHole from '../assets/icon_hole.png'
+import iconTree from '../assets/icon_tree.png'
+import iconSign from '../assets/icon_sign.png'
+import iconLamp from '../assets/icon_lamp.png'
+import iconFilter from '../assets/filter.png'
 
 const markers = ref([])
 const selectedTypes = ref([])
@@ -48,9 +48,9 @@ const toggleCheckboxes = () => {
 }
 
 const handleMarkerClick = (marker) => {
-  selectedMarker.value = marker;
-  console.log(selectedMarker);
-  showModal.value = true;
+  selectedMarker.value = marker
+  console.log(selectedMarker)
+  showModal.value = true
 }
 
 const closeModal = () => {
@@ -59,18 +59,18 @@ const closeModal = () => {
 }
 
 const typeMapping = {
-  'buraco': { label: 'Buraco', icon: iconHole },
+  buraco: { label: 'Buraco', icon: iconHole },
   'arvore-caida': { label: 'Árvore caída', icon: iconTree },
   'falta-de-sinalizacao': { label: 'Falta de sinalização', icon: iconSign },
-  'falta-de-iluminacao': { label: 'Falta de iluminação', icon: iconLamp }
-};
+  'falta-de-iluminacao': { label: 'Falta de iluminação', icon: iconLamp },
+}
 
 const formatType = (type) => {
-  return typeMapping[type]?.label || type;
+  return typeMapping[type]?.label || type
 }
 
 const getIcon = (type) => {
-  return typeMapping[type]?.icon || '';
+  return typeMapping[type]?.icon || ''
 }
 
 onMounted(fetchMarkers)
@@ -91,7 +91,7 @@ onMounted(fetchMarkers)
         :class="{ show: showModal }"
         :style="{ display: showModal ? 'block' : 'none' }"
         aria-labelledby="modalAddLabel"
-        :aria-hidden="(!showModal)"
+        :aria-hidden="!showModal"
       >
         <div class="modal-dialog">
           <div class="modal-content text-center text-white">
@@ -102,7 +102,7 @@ onMounted(fetchMarkers)
                 class="btn-close custom-close-btn"
                 aria-label="Close"
                 @click="closeModal"
-                ></button>
+              ></button>
             </div>
             <div class="modal-body bg-green3" v-if="selectedMarker">
               <h1 class="mb-3 fs-1">{{ formatType(selectedMarker.type) }}</h1>
@@ -111,7 +111,7 @@ onMounted(fetchMarkers)
                   :src="getIcon(selectedMarker.type)"
                   alt="icon"
                   class="icon me-3"
-                  style="width: 70px; height: 70px;"
+                  style="width: 70px; height: 70px"
                 />
                 <div>
                   <p>{{ selectedMarker.count }} denúncias até o momento</p>
@@ -123,13 +123,27 @@ onMounted(fetchMarkers)
           </div>
         </div>
       </div>
-      
-      <MapComponent :markers="filteredMarkers" @marker-click="handleMarkerClick" class="map-component" />
+
+      <MapComponent
+        :markers="filteredMarkers"
+        @marker-click="handleMarkerClick"
+        class="map-component"
+      />
 
       <div class="button-container">
         <button @click="toggleCheckboxes" class="circular-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16" style="position: relative; top: 1.5px; color: #b8e49c">
-            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="90%"
+            height="90%"
+            fill="currentColor"
+            class="bi bi-funnel"
+            viewBox="0 0 16 16"
+            style="position: relative; top: 1.5px; color: #b8e49c"
+          >
+            <path
+              d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"
+            />
           </svg>
           <!--<img :src="iconFilter" alt="filtro" class="button-icon" style="position: relative; top: 2px; filter: brightness(2);" />-->
         </button>
@@ -169,7 +183,7 @@ onMounted(fetchMarkers)
   margin-left: 2%;
   position: absolute;
   top: 10%;
-  z-index: 9999;
+  z-index: 998;
 }
 .circular-button {
   width: 50px;
@@ -190,7 +204,7 @@ onMounted(fetchMarkers)
   color: white;
   border-radius: 5px;
   padding: 10px;
-  width:fit-content;
+  width: fit-content;
 }
 .form-check {
   margin-bottom: 5px;

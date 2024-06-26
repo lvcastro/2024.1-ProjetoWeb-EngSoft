@@ -62,11 +62,13 @@ export async function makeGroups(ungrouped) {
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${g.center.lat}&lon=${g.center.lng}`,
       )
 
+      const data = response.data.address
+
       let components = []
       const fields = ['building', 'house_number', 'road', 'suburb']
 
       for (const f of fields) {
-        if (response[f]) components.push(response[f])
+        if (data[f]) components.push(data[f])
       }
 
       const addr = components.join(', ')

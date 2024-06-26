@@ -207,7 +207,7 @@ const submitForm = async () => {
 @media (max-width: 500px) {
   .map-container {
     width: 100%;
-    height: 90vw;
+    height: 40vh;
     padding-bottom: 100%; /* Proporção 1:1 para largura:altura */
     position: relative;
   }
