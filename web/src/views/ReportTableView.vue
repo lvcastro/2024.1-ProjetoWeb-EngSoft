@@ -90,6 +90,10 @@ async function removeProblem() {
 
 function map(index) {
   currentIndex.value = index
+
+  // Leaflet calcula o tamanho do mapa quando o elemento é carregado
+  // Modal inicialmente não tem tamanho, o que buga o mapa
+  // Depois de abrir o modal envia um sinal de resize na página pro mapa atualizar o tamanho e desbugar
   setTimeout(() => {
     window.dispatchEvent(new Event('resize'))
   }, 100)
