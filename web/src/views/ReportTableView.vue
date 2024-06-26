@@ -88,8 +88,6 @@ async function removeProblem() {
   items.value.splice(idx, 1)
 }
 
-const reload = ref(0)
-
 function map(index) {
   currentIndex.value = index
   setTimeout(() => {
@@ -151,7 +149,7 @@ function map(index) {
           </h3>
           <ul class="list-group mt-3">
             <li v-for="issue in item" :key="issue._id" class="my-1 separation">
-              <p>Feita em: {{ new Date(issue.createdAt).toLocaleString() }}</p>
+              <p>Feita em: {{ new Date(issue.createdAt).toLocaleString('pt-BR') }}</p>
               <p>
                 Email de contato: {{ issue.contactEmail ? issue.contactEmail : 'Não informado' }}
               </p>

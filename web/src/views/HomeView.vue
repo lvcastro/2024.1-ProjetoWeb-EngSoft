@@ -194,11 +194,15 @@ const submitForm = async () => {
         </div>
       </div>
     </div>
-    <div id="alert-container" class="position-fixed top-0 end-0 p-3" style="z-index: 11"></div>
+    <div id="alert-container" class="position-fixed top-0 end-0 p-3"></div>
   </div>
 </template>
 
 <style scoped>
+#alert-container {
+  z-index: 9999;
+}
+
 .map-container {
   width: 100%;
   height: 60vh;

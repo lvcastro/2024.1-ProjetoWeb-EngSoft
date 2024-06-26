@@ -77,7 +77,9 @@
                   required
                 />
               </div>
-              <button type="submit" class="btn text-white bg-green3 m-1">Adicionar</button>
+              <button type="submit" class="btn text-white bg-green3 m-1" data-bs-dismiss="modal">
+                Adicionar
+              </button>
               <button
                 type="button"
                 class="btn text-white bg-green3 m-1"

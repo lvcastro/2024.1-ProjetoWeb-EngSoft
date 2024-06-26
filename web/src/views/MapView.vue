@@ -7,6 +7,7 @@ import iconTree from '../assets/icon_tree.png'
 import iconSign from '../assets/icon_sign.png'
 import iconLamp from '../assets/icon_lamp.png'
 import iconFilter from '../assets/filter.png'
+import { makeGroups } from '../utils/group-reports'
 
 const markers = ref([])
 const selectedTypes = ref([])
@@ -26,9 +27,13 @@ const fetchMarkers = async () => {
   try {
     const response = await axios.get('http://localhost:3000/reports')
     if (Array.isArray(response.data)) {
-      markers.value = response.data.map((item) => ({
-        coordinates: [item.coord.lat, item.coord.lng],
+      const groups = await makeGroups(response.data)
+      markers.value = groups.map((item) => ({
+        coordinates: item.center,
         type: item.problem,
+        count: item.length,
+        address: item.address,
+        date: new Date(item[0].createdAt).toLocaleString('pt-BR'),
       }))
     } else {
       console.error('Os dados recebidos do backend não são do tipo array:', response.data)
@@ -74,8 +79,6 @@ const getIcon = (type) => {
 }
 
 onMounted(fetchMarkers)
-
-// watch(selectedTypes, fetchMarkers)
 </script>
 
 <template>
@@ -115,7 +118,7 @@ onMounted(fetchMarkers)
                 />
                 <div>
                   <p>{{ selectedMarker.count }} denúncias até o momento</p>
-                  <p>Local: {{ selectedMarker.coordinates }}</p>
+                  <p>Local: {{ selectedMarker.address }}</p>
                   <p>Primeira denúncia: {{ selectedMarker.date }}</p>
                 </div>
               </div>
