@@ -14,7 +14,7 @@ Projeto elaborado nas disciplinas de Introdução ao Desenvolvimento Web e Engen
 
 ## Descrição
 
-Este projeto foi desenvolvido para os habitantes de São Carlos reportarem problemas de trânsito na cidade. As denúncias enviadas seriam gerenciadas por uma emissora de TV local, que pode utilizar essas informações para melhorar a cobertura e noticiar problemas de trânsito que persistem há muito tempo.
+Este projeto foi desenvolvido para os habitantes de São Carlos reportarem problemas que prejudicam o trânsito na cidade. As denúncias enviadas seriam gerenciadas por uma emissora de TV local, que pode utilizar essas informações para melhorar a cobertura e noticiar os problemas que persistem há muito tempo.
 
 ## Instruções de uso
 
